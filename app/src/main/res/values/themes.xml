@@ -1,0 +1,183 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="BizLinker" parent="Theme.Material3.Light.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">
+            @color/whiteDark
+        </item>
+        <item name="colorPrimaryVariant">
+            @color/whiteDark
+        </item>
+        <item name="colorOnPrimary">
+            @color/black
+        </item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">
+            @color/black
+        </item>
+        <item name="colorSecondaryVariant">
+            @color/black
+        </item>
+        <item name="colorOnSecondary">
+            @color/black
+        </item>
+        <item name="android:statusBarColor">
+            @color/main
+        </item>
+        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
+        <item name="android:windowBackground">
+            @color/whiteDark
+        </item>
+        <item name="strokeColor">
+            @color/black
+        </item>
+    </style>
+    <!--Светлая тема базовая-->
+    <style name="Theme.BizLinker" parent="BizLinker">
+        <item name="cardViewStyle">
+            @style/CardViewStyle
+        </item>
+        <item name="android:textViewStyle">
+            @style/TextViewStyle
+        </item>
+        <item name="editTextStyle">
+            @style/EditTextStyle
+        </item>
+        <item name="radioButtonStyle">
+            @style/RadioButtonStyle
+        </item>
+        <item name="android:buttonStyle">
+            @style/ButtonStyle
+        </item>
+        <item name="bottomNavigationStyle">
+            @style/BottomNavigationView
+        </item>
+        <item name="imageButtonStyle">
+            @style/ImageButton
+        </item>
+        <item name="materialCardViewStyle">
+            @style/CardViewStyleMaterial
+        </item>
+        <item name="spinnerStyle">
+            @style/SpinnerStyle
+        </item>
+        <item name="checkboxStyle">
+            @style/CheckBoxStyle
+        </item>
+        <item name="textInputStyle">
+            @style/TextInputLayoutStyle
+        </item>
+    </style>
+    <!--Синяя тема-->
+    <style name="ThemeBlue" parent="Theme.BizLinker">
+        <item name="cardViewStyle">
+            @style/CardViewStyleBlue
+        </item>
+        <item name="bottomNavigationStyle">
+            @style/BottomNavigationViewBlue
+        </item>
+        <item name="materialCardViewStyle">
+            @style/CardViewStyleMaterialBlue
+        </item>
+        <item name="android:statusBarColor">
+            @color/blue
+        </item>
+    </style>
+
+    <style name="CardViewStyleBlue" parent="CardView">
+        <item name="cardCornerRadius">
+            20dp
+        </item>
+        <item name="cardElevation">
+            5dp
+        </item>
+        <item name="cardBackgroundColor">
+            @color/blue
+        </item>
+    </style>
+    <style name="BottomNavigationViewBlue" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="android:background">
+            @color/blue
+        </item>
+        <item name="itemIconTint">
+            @color/bottom_nav_day
+        </item>
+        <item name="itemTextColor">
+            @color/bottom_nav_day
+        </item>
+    </style>
+
+    <style name="CardViewStyleMaterialBlue" parent="Widget.MaterialComponents.CardView">
+        <item name="cardCornerRadius">
+            20dp
+        </item>
+        <item name="cardElevation">
+            5dp
+        </item>
+        <item name="cardBackgroundColor">
+            @color/blue
+        </item>
+        <item name="strokeWidth">
+            1dp
+        </item>
+        <item name="android:strokeColor">
+            @color/black
+        </item>
+    </style>
+    <!--Зеленая тема-->
+    <style name="ThemeGreen" parent="Theme.BizLinker">
+        <item name="cardViewStyle">
+            @style/CardViewStyleGreen
+        </item>
+        <item name="bottomNavigationStyle">
+            @style/BottomNavigationViewGreen
+        </item>
+        <item name="materialCardViewStyle">
+            @style/CardViewStyleMaterialGreen
+        </item>
+        <item name="android:statusBarColor">
+            @color/green
+        </item>
+    </style>
+
+    <style name="CardViewStyleGreen" parent="CardView">
+        <item name="cardCornerRadius">
+            20dp
+        </item>
+        <item name="cardElevation">
+            5dp
+        </item>
+        <item name="cardBackgroundColor">
+            @color/green
+        </item>
+    </style>
+
+    <style name="BottomNavigationViewGreen" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="android:background">
+            @color/green
+        </item>
+        <item name="itemIconTint">
+            @color/bottom_nav_day
+        </item>
+        <item name="itemTextColor">
+            @color/bottom_nav_day
+        </item>
+    </style>
+
+    <style name="CardViewStyleMaterialGreen" parent="Widget.MaterialComponents.CardView">
+        <item name="cardCornerRadius">
+            20dp
+        </item>
+        <item name="cardElevation">
+            5dp
+        </item>
+        <item name="cardBackgroundColor">
+            @color/green
+        </item>
+        <item name="strokeWidth">
+            1dp
+        </item>
+        <item name="android:strokeColor">
+            @color/black
+        </item>
+    </style>
+</resources>

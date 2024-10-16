@@ -1,0 +1,48 @@
+package com.alfadev.bizlinker
+
+import android.view.LayoutInflater
+import android.view.View
+import android.view.View.INVISIBLE
+import android.view.ViewGroup
+import android.widget.ImageButton
+import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+
+class WishlistAdapter(private val productList: ArrayList<WishlistItem>, private val itemClickListenerWishlist: OnItemClickListenerWishlist): RecyclerView.Adapter<WishlistAdapter.WishlistViewHolder>() {
+	interface OnItemClickListenerWishlist {
+		fun onItemClickWishlist(position: Int)
+	}
+	
+	inner class WishlistViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+		val productNameTxt: TextView = itemView.findViewById(R.id.invoiceProductNameTxt)
+		val productLogoTxt: TextView = itemView.findViewById(R.id.invoiceProductLogoTxt)
+		val productCount: TextView = itemView.findViewById(R.id.invoiceProductCount)
+		val productPrice: TextView = itemView.findViewById(R.id.invoiceProductPrice)
+		init {
+			itemView.setOnClickListener {
+				val position = bindingAdapterPosition
+				if(position != RecyclerView.NO_POSITION) {
+					itemClickListenerWishlist.onItemClickWishlist(position)
+				}
+			}
+		}
+	}
+	
+	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WishlistViewHolder {
+		val view: View = LayoutInflater.from(parent.context).inflate(R.layout.invoice_product_item, parent, false)
+		return WishlistViewHolder(view)
+	}
+	
+	override fun onBindViewHolder(holder: WishlistViewHolder, position: Int) {
+		val productItem = productList[position]
+		holder.productNameTxt.text = productItem.productName
+		holder.productCount.text = productItem.productCount.toString()
+		holder.productLogoTxt.text = productItem.productName.substring(0, 2)
+		holder.productPrice.text = productItem.productPrice.toString()
+	}
+	
+	override fun getItemCount(): Int {
+		return productList.size
+	}
+}

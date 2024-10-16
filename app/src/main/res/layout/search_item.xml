@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <com.google.android.material.card.MaterialCardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/searchItem"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            app:strokeWidth="3dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            app:cardElevation="2dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <com.google.android.material.card.MaterialCardView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="16dp"
+                    app:cardCornerRadius="50dp"
+                    android:id="@+id/cardviewIconSearch"
+                    app:strokeWidth="1dp"
+                    app:cardBackgroundColor="@color/whiteDark"
+                    app:layout_constraintTop_toBottomOf="@+id/searchDescriptionTxt"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginTop="8dp"
+                    app:strokeColor="@color/black">
+
+                <TextView
+                        android:text="@string/logo_chat_item_txt_hint"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/searchLogoTxt"
+                        android:gravity="center"
+                        android:textAllCaps="true"
+                        android:textAlignment="center"
+                        android:elegantTextHeight="true"
+                        android:autoSizeTextType="uniform"
+                        android:padding="10dp"
+                        android:textColor="@color/black" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                    android:text="@string/username_chat_item_txt_hint"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/searchNameTxt"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:textSize="20sp"
+                    android:textAllCaps="true"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:maxLines="1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp" />
+
+            <TextView
+                    android:text="@string/message_chat_item_txt_hint"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/searchDescriptionTxt"
+                    android:textStyle="normal"
+                    android:textSize="14sp"
+                    android:maxLines="5"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:alpha="0.75"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="4dp"
+                    app:layout_constraintTop_toBottomOf="@+id/searchNameTxt"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp" />
+
+            <Button
+                    android:text="@string/contact"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/searchContact"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="@+id/cardviewIconSearch"
+                    app:layout_constraintTop_toTopOf="@+id/cardviewIconSearch"
+                    android:layout_marginEnd="16dp"
+                    android:backgroundTint="@color/red"
+                    android:drawableTint="@color/whiteDark"
+                    app:iconTint="@color/whiteDark"
+                    app:strokeWidth="1dp"
+                    android:textSize="14sp"
+                    android:textColor="@color/whiteDark"
+                    app:icon="@drawable/contact"
+                    app:iconGravity="end"
+                    app:iconPadding="8dp"
+                    tools:ignore="TextContrastCheck"
+                    app:strokeColor="@color/whiteDark" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

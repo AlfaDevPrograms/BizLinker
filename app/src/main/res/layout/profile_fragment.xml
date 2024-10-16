@@ -1,0 +1,505 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <ScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@+id/profileHeader"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/cardviewProfile"
+                    app:strokeWidth="3dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                    <TextView
+                            android:text="@string/profile_button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/profileTxt"
+                            android:textSize="24sp"
+                            android:gravity="center"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/divider2"
+                            android:layout_marginTop="8dp" />
+
+                    <com.google.android.material.materialswitch.MaterialSwitch
+                            android:text="@string/is_provider"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/switchRole"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:textStyle="bold"
+                            android:textSize="20sp"
+                            app:thumbTint="@color/switch_track_color"
+                            app:trackTintMode="src_in"
+                            app:thumbTintMode="src_in"
+                            app:switchPadding="12dp"
+                            android:fontFamily="@font/main_font"
+                            android:checked="false"
+                            app:trackDecorationTint="?attr/colorOnPrimary"
+                            app:trackTint="@color/whiteDark"
+                            app:trackDecorationTintMode="src_atop"
+                            android:textColor="?attr/colorOnPrimary"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_marginTop="8dp" />
+
+                    <TableLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="16dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:layout_marginBottom="16dp"
+                            app:layout_constraintTop_toTopOf="@id/divider3"
+                            android:layout_marginTop="8dp">
+
+                        <TableRow>
+
+                            <TextView
+                                    android:layout_width="50dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="@string/organization_name"
+                                    android:textSize="20sp"
+                                    android:layout_marginBottom="8dp"
+                                    android:autoSizeTextType="none" />
+
+                            <TextView
+                                    android:id="@+id/textName"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="2"
+                                    android:text=""
+                                    android:textSize="20sp" />
+                        </TableRow>
+
+                        <TableRow>
+
+                            <TextView
+                                    android:layout_width="50dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="@string/organization_ogrn"
+                                    android:textSize="20sp"
+                                    android:layout_marginBottom="8dp"
+                                    android:autoSizeTextType="none" />
+
+                            <TextView
+                                    android:id="@+id/textOgrnNumber"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="2"
+                                    android:text=""
+                                    android:textSize="20sp" />
+                        </TableRow>
+
+                        <TableRow>
+
+                            <TextView
+                                    android:layout_width="50dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="@string/organization_kpp"
+                                    android:textSize="20sp"
+                                    android:layout_marginBottom="8dp"
+                                    android:autoSizeTextType="none" />
+
+                            <TextView
+                                    android:id="@+id/textKppNumber"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="2"
+                                    android:text=""
+                                    android:textSize="20sp" />
+                        </TableRow>
+
+                        <TableRow>
+
+                            <TextView
+                                    android:layout_width="50dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="@string/organization_inn"
+                                    android:textSize="20sp"
+                                    android:layout_marginBottom="8dp"
+                                    android:autoSizeTextType="none" />
+
+                            <TextView
+                                    android:id="@+id/textInnNumber"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="2"
+                                    android:text=""
+                                    android:textSize="20sp" />
+                        </TableRow>
+
+                        <TableRow>
+
+                            <TextView
+                                    android:layout_width="50dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="@string/organization_okpo"
+                                    android:textSize="20sp"
+                                    android:layout_marginBottom="8dp"
+                                    android:autoSizeTextType="none" />
+
+                            <TextView
+                                    android:id="@+id/textOkpoCode"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="2"
+                                    android:text=""
+                                    android:textSize="20sp" />
+                        </TableRow>
+
+                        <TableRow>
+
+                            <TextView
+                                    android:layout_width="50dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="@string/organization_address"
+                                    android:textSize="20sp"
+                                    android:layout_marginBottom="8dp"
+                                    android:autoSizeTextType="none" />
+
+                            <TextView
+                                    android:id="@+id/textAddress"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="2"
+                                    android:text=""
+                                    android:textSize="20sp" />
+                        </TableRow>
+
+                        <TableRow>
+
+                            <TextView
+                                    android:layout_width="50dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="@string/organization_emails"
+                                    android:textSize="20sp"
+                                    android:layout_marginBottom="8dp"
+                                    android:autoSizeTextType="none" />
+
+                            <TextView
+                                    android:id="@+id/textEmails"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="2"
+                                    android:text=""
+                                    android:textSize="20sp" />
+                        </TableRow>
+
+                        <TableRow>
+
+                            <TextView
+                                    android:layout_width="50dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="@string/organization_phones"
+                                    android:textSize="20sp"
+                                    android:layout_marginBottom="8dp"
+                                    android:autoSizeTextType="none" />
+
+                            <TextView
+                                    android:id="@+id/textPhones"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="2"
+                                    android:text=""
+                                    android:textSize="20sp" />
+                        </TableRow>
+
+                        <TableRow>
+
+                            <TextView
+                                    android:layout_width="50dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="@string/organization_form"
+                                    android:textSize="20sp"
+                                    android:layout_marginBottom="8dp"
+                                    android:autoSizeTextType="none" />
+
+                            <TextView
+                                    android:id="@+id/textForm"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="2"
+                                    android:text=""
+                                    android:textSize="20sp" />
+                        </TableRow>
+
+                        <TableRow>
+
+                            <TextView
+                                    android:layout_width="50dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="@string/organization_website"
+                                    android:textSize="20sp"
+                                    android:layout_marginBottom="8dp"
+                                    android:autoSizeTextType="none" />
+
+                            <TextView
+                                    android:id="@+id/textWebsite"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="2"
+                                    android:text=""
+                                    android:textSize="20sp" />
+                        </TableRow>
+
+                        <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                            <TextView
+                                    android:layout_width="50dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="@string/organization_password"
+                                    android:textSize="20sp"
+                                    android:layout_marginBottom="8dp"
+                                    android:autoSizeTextType="none" />
+
+                            <TextView
+                                    android:id="@+id/textPassword"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="2"
+                                    android:text=""
+                                    android:textSize="20sp" />
+                        </TableRow>
+
+                    </TableLayout>
+
+                    <View
+                            android:id="@+id/divider2"
+                            android:layout_width="0dp"
+                            android:layout_height="1dp"
+                            android:background="?attr/colorOnPrimary"
+                            app:layout_constraintTop_toBottomOf="@+id/switchRole"
+                            android:layout_marginEnd="32dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:layout_marginStart="32dp"
+                            android:layout_marginTop="8dp"
+                            android:alpha="0.5" />
+
+                    <View
+                            android:id="@+id/divider3"
+                            android:layout_width="0dp"
+                            android:layout_height="1dp"
+                            android:background="?attr/colorOnPrimary"
+                            app:layout_constraintTop_toBottomOf="@+id/profileTxt"
+                            android:layout_marginEnd="32dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:layout_marginStart="32dp"
+                            android:layout_marginTop="8dp"
+                            android:alpha="0.5" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/cardviewThemes"
+                    app:strokeWidth="3dp"
+                    app:layout_constraintTop_toBottomOf="@+id/cardviewProfile"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginBottom="16dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                    <TextView
+                            android:text="@string/themes_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/themes_txt"
+                            android:textSize="24sp"
+                            android:gravity="center"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            android:layout_marginTop="16dp" />
+
+                    <View
+                            android:id="@+id/divider6"
+                            android:layout_width="0dp"
+                            android:layout_height="1dp"
+                            android:background="?attr/colorOnPrimary"
+                            app:layout_constraintTop_toBottomOf="@+id/themes_txt"
+                            android:layout_marginEnd="32dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:layout_marginStart="32dp"
+                            android:alpha="0.5"
+                            android:layout_marginTop="8dp" />
+
+                    <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="0dp"
+                            android:layout_height="50dp"
+                            android:id="@+id/linearLayout"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/divider6"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="16dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:layout_marginBottom="16dp"
+                            android:layout_marginTop="8dp">
+
+                        <com.google.android.material.card.MaterialCardView
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:id="@+id/theme_light"
+                                android:layout_weight="1"
+                                android:layout_marginEnd="4dp"
+                                app:cardBackgroundColor="@color/main"
+                                app:cardElevation="0dp"
+                                app:cardCornerRadius="15dp" />
+
+                        <com.google.android.material.card.MaterialCardView
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:id="@+id/theme_green"
+                                android:layout_weight="1"
+                                android:layout_marginEnd="4dp"
+                                app:cardBackgroundColor="@color/green"
+                                app:cardElevation="0dp"
+                                app:cardCornerRadius="15dp" />
+
+                        <com.google.android.material.card.MaterialCardView
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:id="@+id/theme_blue"
+                                android:layout_weight="1"
+                                android:layout_marginEnd="4dp"
+                                app:cardBackgroundColor="@color/blue"
+                                app:cardElevation="0dp"
+                                app:cardCornerRadius="15dp" />
+
+                        <com.google.android.material.card.MaterialCardView
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:id="@+id/theme_dark"
+                                android:layout_weight="1"
+                                android:layout_marginEnd="4dp"
+                                app:cardBackgroundColor="@color/gray"
+                                app:cardElevation="0dp"
+                                app:cardCornerRadius="15dp" />
+
+                        <com.google.android.material.card.MaterialCardView
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:id="@+id/theme_dark2"
+                                android:layout_weight="1"
+                                android:layout_marginEnd="4dp"
+                                app:cardBackgroundColor="@color/gray2"
+                                app:cardElevation="0dp"
+                                app:cardCornerRadius="15dp" />
+
+                        <com.google.android.material.card.MaterialCardView
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:id="@+id/theme_dark3"
+                                android:layout_weight="1"
+                                android:layout_marginEnd="4dp"
+                                app:cardElevation="0dp"
+                                app:cardBackgroundColor="@color/gray3"
+                                app:cardCornerRadius="15dp" />
+                    </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <com.google.android.material.card.MaterialCardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:cardCornerRadius="0dp"
+            app:strokeWidth="0.5dp"
+            android:layout_marginTop="-8dp"
+            android:layout_marginStart="-8dp"
+            android:layout_marginEnd="-8dp"
+            android:id="@+id/profileHeader"
+            tools:ignore="VisualLintBounds">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="8dp"
+                tools:ignore="VisualLintBounds">
+
+            <TextView
+                    android:text="@string/profile_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/profileHeaderTxt"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="@+id/infoProfile"
+                    app:layout_constraintTop_toTopOf="@+id/infoProfile"
+                    android:layout_marginStart="16dp"
+                    android:textSize="34sp"
+                    android:gravity="center" />
+
+            <ImageButton
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:id="@+id/infoProfile"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:foreground="@drawable/info"
+                    android:background="@color/empty"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="8dp"
+                    tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck"
+                    android:foregroundTint="@color/red" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <com.google.android.material.card.MaterialCardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/invoiceItem"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            app:strokeWidth="3dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <ImageButton
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:id="@+id/summaryPriceImg"
+                    android:background="@color/empty"
+                    android:foreground="@drawable/price"
+                    android:clickable="false"
+                    app:layout_constraintStart_toStartOf="@+id/cardviewIconProduct"
+                    app:layout_constraintBottom_toBottomOf="@+id/invoiceSummTxt"
+                    app:layout_constraintEnd_toEndOf="@+id/invoiceOrganizationNameTxt"
+                    app:layout_constraintTop_toTopOf="@+id/invoiceSummTxt" />
+
+            <ImageButton
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:id="@+id/DateImg"
+                    android:background="@color/empty"
+                    android:foreground="@drawable/date"
+                    android:clickable="false"
+                    app:layout_constraintTop_toBottomOf="@+id/cardviewIconInvoice"
+                    app:layout_constraintStart_toStartOf="@+id/cardviewIconInvoice"
+                    app:layout_constraintBottom_toBottomOf="@+id/invoiceDateTxt"
+                    android:layout_marginTop="4dp" />
+
+            <com.google.android.material.card.MaterialCardView
+                    android:layout_width="125dp"
+                    android:layout_height="50dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="16dp"
+                    app:cardCornerRadius="20dp"
+                    android:id="@+id/cardviewIconInvoice"
+                    app:strokeWidth="1dp"
+                    app:cardBackgroundColor="@color/whiteDark"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:strokeColor="@color/black">
+
+                <TextView
+                        android:text="@string/product_count_product_item_txt_hint"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/invoiceNumberTxt"
+                        android:gravity="center"
+                        android:textAllCaps="true"
+                        android:textAlignment="center"
+                        android:elegantTextHeight="true"
+                        android:autoSizeTextType="uniform"
+                        android:padding="10dp"
+                        android:textColor="@color/black" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                    android:text="@string/date_hint_txt"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:id="@+id/invoiceDateTxt"
+                    android:textSize="16sp"
+                    android:textAllCaps="false"
+                    app:layout_constraintEnd_toEndOf="@+id/cardviewIconInvoice"
+                    android:maxLines="1"
+                    android:autoSizeTextType="uniform"
+                    app:layout_constraintTop_toBottomOf="@+id/cardviewIconInvoice"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginTop="4dp"
+                    android:gravity="bottom|start"
+                    android:alpha="0.75"
+                    app:layout_constraintStart_toEndOf="@+id/DateImg"
+                    android:layout_marginStart="4dp"
+                    android:autoSizeMaxTextSize="16sp" />
+
+            <TextView
+                    android:text="@string/username_chat_item_txt_hint"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:id="@+id/invoiceOrganizationNameTxt"
+                    android:textSize="16sp"
+                    android:textAllCaps="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="16dp"
+                    android:maxLines="1"
+                    app:layout_constraintStart_toEndOf="@+id/cardviewIconInvoice"
+                    app:layout_constraintTop_toTopOf="@+id/cardviewIconInvoice"
+                    android:layout_marginStart="8dp"
+                    android:autoSizeTextType="none"
+                    app:layout_constraintBottom_toBottomOf="@+id/cardviewIconInvoice"
+                    android:layout_marginTop="4dp" />
+
+            <TextView
+                    android:text="@string/sum_hint_txt"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:id="@+id/invoiceSummTxt"
+                    android:textSize="16sp"
+                    android:textAllCaps="false"
+                    android:maxLines="1"
+                    android:autoSizeTextType="uniform"
+                    app:layout_constraintBottom_toBottomOf="@+id/invoiceDateTxt"
+                    app:layout_constraintTop_toTopOf="@+id/invoiceDateTxt"
+                    android:gravity="bottom|end"
+                    app:layout_constraintEnd_toStartOf="@+id/summaryPriceImg"
+                    android:layout_marginEnd="4dp"
+                    android:autoSizeMaxTextSize="16sp"
+                    app:layout_constraintStart_toStartOf="@+id/invoiceOrganizationNameTxt" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

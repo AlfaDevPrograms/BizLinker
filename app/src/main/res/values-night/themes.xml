@@ -1,0 +1,88 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="BizLinkerDark" parent="Theme.Material3.Light.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/black</item>
+        <item name="colorPrimaryVariant">@color/black</item>
+        <item name="colorOnPrimary">@color/whiteDark</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/whiteDark</item>
+        <item name="colorSecondaryVariant">@color/whiteDark</item>
+        <item name="colorOnSecondary">@color/whiteDark</item>
+        <item name="android:statusBarColor">@color/gray</item>
+        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
+        <item name="android:windowBackground">@color/black</item>
+        <item name="strokeColor">@color/whiteDark</item>
+    </style>
+    <!--Темная тема базовая-->
+    <style name="Theme.BizLinkerDark" parent="BizLinkerDark">
+        <item name="cardViewStyle">@style/CardViewStyleDark</item>
+        <item name="android:textViewStyle">@style/TextViewStyleDark</item>
+        <item name="editTextStyle">@style/EditTextStyleDark</item>
+        <item name="radioButtonStyle">@style/RadioButtonStyleDark</item>
+        <item name="android:buttonStyle">@style/ButtonStyle</item>
+        <item name="bottomNavigationStyle">@style/BottomNavigationViewDark</item>
+        <item name="imageButtonStyle">@style/ImageButtonDark</item>
+        <item name="materialCardViewStyle">@style/CardViewStyleMaterialDark</item>
+        <item name="spinnerStyle">@style/SpinnerStyleDark</item>
+        <item name="checkboxStyle"> @style/CheckBoxStyleDark</item>
+        <item name="textInputStyle">
+            @style/TextInputLayoutStyleDark
+        </item>
+    </style>
+    <!--Темно-Синяя тема-->
+    <style name="ThemeDark2" parent="Theme.BizLinkerDark">
+        <item name="cardViewStyle">@style/CardViewStyleDark2</item>
+        <item name="bottomNavigationStyle">@style/BottomNavigationViewDark2</item>
+        <item name="materialCardViewStyle">@style/CardViewStyleMaterialDark2</item>
+        <item name="android:statusBarColor">@color/gray2</item>
+    </style>
+    <style name="CardViewStyleDark2" parent="CardView">
+        <item name="cardCornerRadius">20dp</item>
+        <item name="cardElevation">5dp</item>
+        <item name="cardBackgroundColor">@color/gray2</item>
+    </style>
+    <style name="BottomNavigationViewDark2" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="android:background">@color/gray2</item>
+        <item name="itemIconTint">
+            @color/bottom_nav_night
+        </item>
+        <item name="itemTextColor">
+            @color/bottom_nav_night
+        </item>
+    </style>
+    <style name="CardViewStyleMaterialDark2" parent="Widget.MaterialComponents.CardView">
+        <item name="cardCornerRadius">20dp</item>
+        <item name="cardElevation">5dp</item>
+        <item name="cardBackgroundColor">@color/gray2</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="android:strokeColor">@color/whiteDark</item>
+    </style>
+    <!--Темно-красная тема-->
+    <style name="ThemeDark3" parent="Theme.BizLinkerDark">
+        <item name="cardViewStyle">@style/CardViewStyleDark3</item>
+        <item name="bottomNavigationStyle">@style/BottomNavigationViewDark3</item>
+        <item name="materialCardViewStyle">@style/CardViewStyleMaterialDark3</item>
+        <item name="android:statusBarColor">@color/gray3</item>
+    </style>
+    <style name="CardViewStyleDark3" parent="CardView">
+        <item name="cardCornerRadius">20dp</item>
+        <item name="cardElevation">5dp</item>
+        <item name="cardBackgroundColor">@color/gray3</item>
+    </style>
+    <style name="BottomNavigationViewDark3" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="android:background">@color/gray3</item>
+        <item name="itemIconTint">
+            @color/bottom_nav_night
+        </item>
+        <item name="itemTextColor">
+            @color/bottom_nav_night
+        </item>
+    </style>
+    <style name="CardViewStyleMaterialDark3" parent="Widget.MaterialComponents.CardView">
+        <item name="cardCornerRadius">20dp</item>
+        <item name="cardElevation">5dp</item>
+        <item name="cardBackgroundColor">@color/gray3</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="android:strokeColor">@color/whiteDark</item>
+    </style>
+</resources>

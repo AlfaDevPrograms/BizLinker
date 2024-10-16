@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
+
+    <com.google.android.material.card.MaterialCardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:cardCornerRadius="0dp"
+            android:id="@+id/selectedChatHeader"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="-8dp"
+            android:layout_marginEnd="-8dp"
+            app:strokeWidth="0.5dp"
+            tools:ignore="VisualLintBounds"
+            android:layout_marginTop="-8dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingHorizontal="8dp">
+
+            <ImageButton
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:id="@+id/backToChats"
+                    app:layout_constraintTop_toTopOf="@+id/selectedChatAva"
+                    app:layout_constraintBottom_toBottomOf="@+id/selectedChatAva"
+                    android:foreground="@drawable/back"
+                    android:background="@color/empty"
+                    tools:ignore="ImageContrastCheck,SpeakableTextPresentCheck,TouchTargetSizeCheck"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="4dp" />
+
+            <ImageButton
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:id="@+id/add_invoice"
+                    app:layout_constraintTop_toTopOf="@+id/selectedChatAva"
+                    app:layout_constraintBottom_toBottomOf="@+id/selectedChatAva"
+                    android:foreground="@drawable/create_invoice"
+                    android:background="@color/empty"
+                    tools:ignore="ImageContrastCheck,SpeakableTextPresentCheck,TouchTargetSizeCheck"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+            <com.google.android.material.card.MaterialCardView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginBottom="8dp"
+                    app:cardCornerRadius="50dp"
+                    android:id="@+id/selectedChatAva"
+                    app:strokeWidth="1dp"
+                    app:cardBackgroundColor="@color/whiteDark"
+                    app:layout_constraintStart_toEndOf="@+id/backToChats"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="4dp">
+
+                <TextView
+                        android:text="@string/logo_chat_item_txt_hint"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/selectedChatAvaTxt"
+                        android:gravity="center"
+                        android:textAllCaps="true"
+                        android:textAlignment="center"
+                        android:elegantTextHeight="true"
+                        android:autoSizeTextType="uniform"
+                        android:padding="4dp"
+                        android:textColor="@color/black" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/selectedChatAva"
+                    app:layout_constraintTop_toTopOf="@+id/selectedChatAva"
+                    app:layout_constraintStart_toEndOf="@+id/selectedChatAva"
+                    app:layout_constraintEnd_toStartOf="@+id/add_invoice"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="2dp">
+
+                <TextView
+                        android:text="@string/username_chat_item_txt_hint"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/selectedChatUsernameTxt"
+                        android:textSize="18sp"
+                        android:textAllCaps="true" />
+
+                <TextView
+                        android:text="@string/datetime_chat_item_txt_hint"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/selectedChatOnlineTxt"
+                        android:textStyle="normal"
+                        android:textSize="14sp"
+                        android:gravity="center|start"
+                        android:alpha="0.5"
+                        tools:ignore="TextContrastCheck" />
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/selectedChatHeader"
+            android:id="@+id/allMesagesChat" />
+
+    <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:id="@+id/inputBg"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/cardviewInput"
+            android:layout_marginTop="-8dp" />
+
+    <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:id="@+id/cardviewInput">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:autofillHints=""
+                    android:inputType="text|textImeMultiLine|textMultiLine|textNoSuggestions"
+                    android:id="@+id/selectedChatMessage"
+                    app:layout_constraintBottom_toBottomOf="@+id/attach"
+                    app:layout_constraintTop_toTopOf="@+id/attach"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="16dp"
+                    android:hint="@string/message_hint"
+                    app:layout_constraintEnd_toStartOf="@+id/attach"
+                    android:textSize="20sp"
+                    android:layout_marginEnd="8dp"
+                    android:paddingVertical="12dp"
+                    android:maxLines="7"
+                    android:textColorHighlight="@color/red"
+                    android:textCursorDrawable="@drawable/custom_cursor" />
+
+            <ImageButton
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:id="@+id/attach"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:foreground="@drawable/attach"
+                    android:background="@color/empty"
+                    tools:ignore="ImageContrastCheck,SpeakableTextPresentCheck,TouchTargetSizeCheck"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="16dp" />
+
+            <ImageButton
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:id="@+id/send"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:foreground="@drawable/send"
+                    android:background="@color/empty"
+                    tools:ignore="ImageContrastCheck,SpeakableTextPresentCheck,TouchTargetSizeCheck"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="16dp"
+                    android:visibility="invisible"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

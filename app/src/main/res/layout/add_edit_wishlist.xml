@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <com.google.android.material.card.MaterialCardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/cardviewAddEditWishlistSave"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:strokeColor="@color/whiteDark"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:strokeWidth="3dp"
+            app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <TextView
+                    android:text="@string/add_product"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:id="@+id/addEditWishlistHeaderTxt"
+                    app:layout_constraintBottom_toBottomOf="@+id/backToWishlistFromAddEditWishlist"
+                    app:layout_constraintTop_toTopOf="@+id/backToWishlistFromAddEditWishlist"
+                    android:gravity="bottom|start"
+                    app:layout_constraintStart_toEndOf="@+id/backToWishlistFromAddEditWishlist"
+                    android:autoSizeTextType="uniform"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginStart="4dp" />
+
+            <ImageButton
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:id="@+id/backToWishlistFromAddEditWishlist"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginTop="16dp"
+                    android:foreground="@drawable/back"
+                    android:background="@color/empty"
+                    tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck"
+                    app:layout_constraintStart_toStartOf="@+id/addEditWishlistNameTIL" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/addEditWishlistNameTIL"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/product_name"
+                    app:cursorColor="@color/red"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="16dp"
+                    app:layout_constraintTop_toBottomOf="@+id/backToWishlistFromAddEditWishlist"
+                    android:layout_marginTop="16dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/addEditWishlistNameTIET"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/main_font"
+                        android:textColor="?attr/colorOnPrimary"
+                        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck"
+                        android:imeOptions="actionNext"
+                        android:maxLines="1"
+                        android:inputType="text"
+                        android:textStyle="bold"
+                        android:textSize="20sp"
+                        android:textSelectHandle="@color/red"
+                        android:textSelectHandleLeft="@color/red"
+                        android:textSelectHandleRight="@color/red"
+                        android:textColorHighlight="@color/red"
+                        android:textCursorDrawable="@drawable/custom_cursor" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/addEditWishlistCountTIL"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/product_count"
+                    app:cursorColor="@color/red"
+                    app:layout_constraintEnd_toEndOf="@+id/addEditWishlistNameTIL"
+                    app:layout_constraintStart_toStartOf="@+id/addEditWishlistNameTIL"
+                    app:layout_constraintTop_toBottomOf="@+id/addEditWishlistNameTIL">
+
+                <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/addEditWishlistCountTIET"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/main_font"
+                        android:textColor="?attr/colorOnPrimary"
+                        android:imeOptions="actionNext"
+                        android:inputType="number"
+                        android:textStyle="bold"
+                        android:textSize="20sp"
+                        android:maxLines="1"
+                        android:textSelectHandle="@color/red"
+                        android:textSelectHandleLeft="@color/red"
+                        android:textSelectHandleRight="@color/red"
+                        android:textColorHighlight="@color/red"
+                        android:textCursorDrawable="@drawable/custom_cursor" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/addEditWishlistPriceTIL"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/like_price"
+                    app:cursorColor="@color/red"
+                    app:layout_constraintEnd_toEndOf="@+id/addEditWishlistNameTIL"
+                    app:layout_constraintStart_toStartOf="@+id/addEditWishlistNameTIL"
+                    app:layout_constraintTop_toBottomOf="@+id/addEditWishlistCountTIL">
+
+                <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/addEditWishlistPriceTIET"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/main_font"
+                        android:textColor="?attr/colorOnPrimary"
+                        android:imeOptions="actionNext"
+                        android:inputType="number|numberDecimal"
+                        android:textStyle="bold"
+                        android:textSize="20sp"
+                        android:maxLines="1"
+                        android:textSelectHandle="@color/red"
+                        android:textSelectHandleLeft="@color/red"
+                        android:textSelectHandleRight="@color/red"
+                        android:textColorHighlight="@color/red"
+                        android:textCursorDrawable="@drawable/custom_cursor" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                    android:text="@string/save"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/buttonAddEditWishlistSave"
+                    app:layout_constraintEnd_toEndOf="@+id/addEditWishlistCountTIL"
+                    android:backgroundTint="@color/red"
+                    android:drawableTint="@color/whiteDark"
+                    app:iconTint="@color/whiteDark"
+                    app:strokeWidth="1dp"
+                    android:textSize="24sp"
+                    android:textColor="@color/whiteDark"
+                    app:icon="@drawable/save"
+                    app:iconGravity="end"
+                    app:iconPadding="8dp"
+                    tools:ignore="TextContrastCheck"
+                    app:strokeColor="@color/whiteDark"
+                    app:iconSize="35dp"
+                    app:layout_constraintStart_toStartOf="@+id/addEditWishlistCountTIL"
+                    app:layout_constraintTop_toBottomOf="@+id/addEditWishlistPriceTIL"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginTop="8dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
