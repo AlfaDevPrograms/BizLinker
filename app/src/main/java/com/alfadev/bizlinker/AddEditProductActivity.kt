@@ -17,7 +17,6 @@ import com.alfadev.bizlinker.databinding.ActivityAddEditProductBinding
 import com.bumptech.glide.Glide
 import java.io.File
 
-//
 class AddEditProductActivity: AppCompatActivity() {
 	companion object {
 		var editProductItem: ProductItem? = null
