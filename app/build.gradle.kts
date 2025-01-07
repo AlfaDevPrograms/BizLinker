@@ -34,6 +34,8 @@ android {
 }
 
 dependencies {
+    implementation(libs.gson)
+    implementation (libs.material.vx)
     implementation(libs.glide)
     annotationProcessor(libs.compiler)
     implementation (libs.mobileads)

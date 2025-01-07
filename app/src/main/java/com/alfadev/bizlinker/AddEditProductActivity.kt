@@ -7,39 +7,61 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doAfterTextChanged
+import com.alfadev.bizlinker.MainActivity.Companion.PRODUCTS
+import com.alfadev.bizlinker.MainActivity.Companion.BASE_URL
+import com.alfadev.bizlinker.MainActivity.Companion.HEADER_TXT
+import com.alfadev.bizlinker.MainActivity.Companion.HEADER_VALUE
+import com.alfadev.bizlinker.MainActivity.Companion.TOKEN_TXT
+import com.alfadev.bizlinker.MainActivity.Companion.TOKEN_VALUE
+import com.alfadev.bizlinker.MainActivity.Companion.TOKEN_VALUE_START
+import com.alfadev.bizlinker.MainActivity.Companion.client
 import com.alfadev.bizlinker.MainActivity.Companion.sharedPreferences
 import com.alfadev.bizlinker.databinding.ActivityAddEditProductBinding
 import com.bumptech.glide.Glide
+import okhttp3.Call
+import okhttp3.Callback
+import okhttp3.FormBody
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.Request
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.Response
+import org.json.JSONObject
 import java.io.File
+import java.io.IOException
 
-class AddEditProductActivity: AppCompatActivity() {
+class AddEditProductActivity : AppCompatActivity() {
 	companion object {
 		var editProductItem: ProductItem? = null
 	}
+	
 	//Биндинг
 	private lateinit var binding: ActivityAddEditProductBinding
+	@SuppressLint("SetTextI18n")
 	override fun onCreate(savedInstanceState: Bundle?) {
 		sharedPreferences = getSharedPreferences(getString(R.string.shared_pref), MODE_PRIVATE)
 		MainActivity.setTheme(this) //Создание самого проекта и привязки!
 		super.onCreate(savedInstanceState)
 		binding = ActivityAddEditProductBinding.inflate(layoutInflater)
 		setContentView(binding.root)
-		if(editProductItem != null) {
+		if (editProductItem != null) {
 			binding.addEditProductHeaderTxt.text = getString(R.string.edit_product)
 			binding.addEditProductNameTIET.setText(editProductItem!!.name)
 			binding.addEditProductPriceTIET.setText(editProductItem!!.price.toString())
-			if(editProductItem!!.fileUrl != null) {
-				binding.addEditProductPhotoTIET.setText(editProductItem!!.fileUrl.toString())
+			if (editProductItem!!.image != null) {
+				binding.addEditProductPhotoTIET.setText(editProductItem!!.image.toString())
+				Glide.with(this).load(binding.addEditProductPhotoTIET.text!!.toString())
+					.into(binding.addEditProductPhoto)
 			}
 			binding.addEditProductCountTIET.setText(editProductItem!!.count.toString())
 			binding.addEditProductDescriptionTIET.setText(editProductItem!!.description)
-		}
-		else {
+		} else {
 			binding.addEditProductHeaderTxt.text = getString(R.string.add_product)
 			binding.addEditProductNameTIET.setText("")
 			binding.addEditProductPriceTIET.setText("")
@@ -52,36 +74,199 @@ class AddEditProductActivity: AppCompatActivity() {
 			finish()
 		}
 		binding.cardviewAddEditProductSave.setOnClickListener {
-			if(binding.addEditProductNameTIET.text!!.isEmpty()) {
+			if (binding.addEditProductNameTIET.text!!.isEmpty()) {
 				binding.addEditProductNameTIL.error = getString(R.string.error_input)
 			}
-			if(binding.addEditProductPriceTIET.text!!.isEmpty()) {
+			if (binding.addEditProductPriceTIET.text!!.isEmpty()) {
 				binding.addEditProductPriceTIL.error = getString(R.string.error_input)
 			}
-			if(binding.addEditProductCountTIET.text!!.isEmpty()) {
+			if (binding.addEditProductCountTIET.text!!.isEmpty()) {
 				binding.addEditProductCountTIL.error = getString(R.string.error_input)
 			}
-			if(binding.addEditProductDescriptionTIET.text!!.isEmpty()) {
+			if (binding.addEditProductDescriptionTIET.text!!.isEmpty()) {
 				binding.addEditProductDescriptionTIL.error = getString(R.string.error_input)
 			}
-			if(binding.addEditProductNameTIET.text!!.isNotEmpty() && binding.addEditProductPriceTIET.text!!.isNotEmpty() && binding.addEditProductCountTIET.text!!.isNotEmpty() && binding.addEditProductDescriptionTIET.text!!.isNotEmpty()) {
-				editProductItem = null
-				finish()
+			if (binding.addEditProductNameTIET.text!!.isNotEmpty() &&
+				binding.addEditProductPriceTIET.text!!.isNotEmpty() &&
+				binding.addEditProductCountTIET.text!!.isNotEmpty() &&
+				binding.addEditProductDescriptionTIET.text!!.isNotEmpty()
+			) {
+				if (editProductItem != null) {
+					val imageType: String =
+						if (binding.addEditProductPhotoTIET.text.toString().lowercase()
+								.startsWith("http" ) || binding.addEditProductPhotoTIET.text.toString().isEmpty()
+						) {
+							"image_url"
+						} else {
+							"image"
+						}
+					val requestBody: FormBody
+					val request: Request
+					if (imageType == "image_url") {
+						requestBody = if (binding.addEditProductPhotoTIET.text.toString().isNotEmpty()) {
+							FormBody.Builder()
+								.add("name", binding.addEditProductNameTIET.text.toString())
+								.add("count", binding.addEditProductCountTIET.text.toString())
+								.add("description", binding.addEditProductDescriptionTIET.text.toString())
+								.add("price", binding.addEditProductPriceTIET.text.toString())
+								.add(imageType,binding.addEditProductPhotoTIET.text.toString()).build()
+						} else {
+							FormBody.Builder()
+								.add("name", binding.addEditProductNameTIET.text.toString())
+								.add("count", binding.addEditProductCountTIET.text.toString())
+								.add("description", binding.addEditProductDescriptionTIET.text.toString())
+								.add("price", binding.addEditProductPriceTIET.text.toString()).build()
+						}
+						request = Request.Builder()
+							.url("$BASE_URL$PRODUCTS/${editProductItem!!.id}")
+							.addHeader(HEADER_TXT, HEADER_VALUE)
+							.addHeader(TOKEN_TXT, "$TOKEN_VALUE_START$TOKEN_VALUE")
+							.post(requestBody)
+							.build()
+					} else {
+						val imageFile = File(binding.addEditProductPhotoTIET.text.toString()) // Укажите путь к вашему изображению
+						val requestBodyImage = imageFile
+							.asRequestBody("image/jpeg".toMediaTypeOrNull() // Укажите ваш тип изображения
+							)
+						val multipartBody = MultipartBody.Builder()
+							.setType(MultipartBody.FORM)
+							.addFormDataPart("name", binding.addEditProductNameTIET.text.toString())
+							.addFormDataPart("count", binding.addEditProductCountTIET.text.toString())
+							.addFormDataPart("description", binding.addEditProductDescriptionTIET.text.toString())
+							.addFormDataPart("price", binding.addEditProductPriceTIET.text.toString())
+							.addFormDataPart(imageType, imageFile.name, requestBodyImage) // 'image' - это имя параметра
+							.build()
+						request = Request.Builder()
+							.url("$BASE_URL$PRODUCTS/${editProductItem!!.id}")
+							.addHeader(HEADER_TXT, HEADER_VALUE)
+							.addHeader(TOKEN_TXT, "$TOKEN_VALUE_START$TOKEN_VALUE")
+							.post(multipartBody)
+							.build()
+					}
+					client.newCall(request).enqueue(object : Callback {
+						override fun onResponse(call: Call, response: Response) {
+							if (response.isSuccessful) {
+								response.use {
+									val responseBody = it.body?.string() // Читаем тело ответа
+									val json = JSONObject(responseBody!!)
+									Log.e("RESPONSE", json.toString())
+								}
+							} else {
+								response.use {
+									val responseBody = it.body?.string() // Читаем тело ответа
+									val json = JSONObject(responseBody!!)
+									Log.e("RESPONSE", json.toString())
+								}
+							}
+							returnData()
+						}
+						
+						override fun onFailure(call: Call, e: IOException) {
+							Log.e("RESPONSE", e.toString())
+							returnData()
+						}
+					})
+					editProductItem = null
+				} else {
+					val imageType: String =
+						if (binding.addEditProductPhotoTIET.text.toString().lowercase()
+								.startsWith("http")  || binding.addEditProductPhotoTIET.text.toString().isEmpty()
+						) {
+							"image_url"
+						} else {
+							"image"
+						}
+					val requestBody: FormBody
+					val request: Request
+					if (imageType == "image_url") {
+						requestBody = if (binding.addEditProductPhotoTIET.text.toString().isNotEmpty()) {
+							FormBody.Builder()
+								.add("name", binding.addEditProductNameTIET.text.toString())
+								.add("count", binding.addEditProductCountTIET.text.toString())
+								.add("description", binding.addEditProductDescriptionTIET.text.toString())
+								.add("price", binding.addEditProductPriceTIET.text.toString())
+								.add(imageType,binding.addEditProductPhotoTIET.text.toString()).build()
+						} else {
+							FormBody.Builder()
+								.add("name", binding.addEditProductNameTIET.text.toString())
+								.add("count", binding.addEditProductCountTIET.text.toString())
+								.add("description", binding.addEditProductDescriptionTIET.text.toString())
+								.add("price", binding.addEditProductPriceTIET.text.toString()).build()
+						}
+						request = Request.Builder()
+							.url("$BASE_URL$PRODUCTS")
+							.addHeader(HEADER_TXT, HEADER_VALUE)
+							.addHeader(TOKEN_TXT, "$TOKEN_VALUE_START$TOKEN_VALUE")
+							.post(requestBody)
+							.build()
+					} else {
+						val imageFile = File(binding.addEditProductPhotoTIET.text.toString()) // Укажите путь к вашему изображению
+						val requestBodyImage = imageFile
+							.asRequestBody("image/jpeg".toMediaTypeOrNull() // Укажите ваш тип изображения
+							)
+						val multipartBody = MultipartBody.Builder()
+							.setType(MultipartBody.FORM)
+							.addFormDataPart("name", binding.addEditProductNameTIET.text.toString())
+							.addFormDataPart("count", binding.addEditProductCountTIET.text.toString())
+							.addFormDataPart("description", binding.addEditProductDescriptionTIET.text.toString())
+							.addFormDataPart("price", binding.addEditProductPriceTIET.text.toString())
+							.addFormDataPart(imageType, imageFile.name, requestBodyImage) // 'image' - это имя параметра
+							.build()
+						request = Request.Builder()
+							.url("$BASE_URL$PRODUCTS")
+							.addHeader(HEADER_TXT, HEADER_VALUE)
+							.addHeader(TOKEN_TXT, "$TOKEN_VALUE_START$TOKEN_VALUE")
+							.post(multipartBody)
+							.build()
+					}
+					client.newCall(request).enqueue(object : Callback {
+						override fun onResponse(call: Call, response: Response) {
+							if (response.isSuccessful) {
+								response.use {
+									val responseBody = it.body?.string() // Читаем тело ответа
+									val json = JSONObject(responseBody!!)
+									Log.e("RESPONSE", json.toString())
+								}
+							} else {
+								response.use {
+									val responseBody = it.body?.string() // Читаем тело ответа
+									val json = JSONObject(responseBody!!)
+									Log.e("RESPONSE", json.toString())
+								}
+							}
+							returnData()
+						}
+						
+						override fun onFailure(call: Call, e: IOException) {
+							Log.e("RESPONSE", e.toString())
+							returnData()
+						}
+					})
+				}
 			}
 		}
-		val someActivityResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-			if(result.resultCode == Activity.RESULT_OK) {
-				val data: Intent? = result.data
-				val selectedImageUri: Uri? = data!!.data
-				val finalFile = File(getRealPathFromURI(selectedImageUri)!!)
-				binding.addEditProductPhotoTIET.setText(finalFile.toString())
+		val someActivityResultLauncher =
+			registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+				if (result.resultCode == Activity.RESULT_OK) {
+					val data: Intent? = result.data
+					val selectedImageUri: Uri? = data!!.data                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+					val finalFile = File(getRealPathFromURI(selectedImageUri)!!)
+					binding.addEditProductPhotoTIET.setText(finalFile.toString())
+					binding.addEditProductPhotoTIL.isEnabled = false
+				}
 			}
-		}
 		binding.cardviewAddEditProductPickPhoto.setOnClickListener {
-			if(ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-				ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE), 100)
-			}
-			else {
+			if (ContextCompat.checkSelfPermission(
+					this,
+					android.Manifest.permission.READ_EXTERNAL_STORAGE
+				) != PackageManager.PERMISSION_GRANTED
+			) {
+				ActivityCompat.requestPermissions(
+					this,
+					arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE),
+					100
+				)
+			} else {
 				val intent = Intent(Intent.ACTION_PICK)
 				intent.type = "image/*"
 				someActivityResultLauncher.launch(intent)
@@ -89,41 +274,47 @@ class AddEditProductActivity: AppCompatActivity() {
 		}
 		binding.addEditProductPhotoTIET.doAfterTextChanged {
 			try {
-				if(binding.addEditProductPhotoTIET.text!!.isNotEmpty()) {
-					if(binding.addEditProductPhotoTIET.text!![0] == '/') {
-						Glide.with(this).load(File(binding.addEditProductPhotoTIET.text!!.toString())).into(binding.addEditProductPhoto)
-					}
-					else {
-						Glide.with(this).load(binding.addEditProductPhotoTIET.text!!.toString()).into(binding.addEditProductPhoto)
+				if (binding.addEditProductPhotoTIET.text!!.isNotEmpty()) {
+					if (binding.addEditProductPhotoTIET.text!![0] == '/') {
+						Glide.with(this)
+							.load(File(binding.addEditProductPhotoTIET.text!!.toString()))
+							.into(binding.addEditProductPhoto)
+					} else {
+						Glide.with(this).load(binding.addEditProductPhotoTIET.text!!.toString())
+							.into(binding.addEditProductPhoto)
 					}
 				}
-			}
-			catch(_: Exception) {
+			} catch (_: Exception) {
 			}
 		}
 		binding.cardviewAddEditProductPhoto.setOnClickListener {
 			binding.cardviewAddEditProductPickPhoto.performClick()
 		}
 		binding.addEditProductNameTIET.doAfterTextChanged {
-			if(it!!.isNotEmpty()) {
+			if (it!!.isNotEmpty()) {
 				binding.addEditProductNameTIL.error = null
 			}
 		}
 		binding.addEditProductPriceTIET.doAfterTextChanged {
-			if(it!!.isNotEmpty()) {
+			if (it!!.isNotEmpty()) {
 				binding.addEditProductPriceTIL.error = null
 			}
 		}
 		binding.addEditProductCountTIET.doAfterTextChanged {
-			if(it!!.isNotEmpty()) {
+			if (it!!.isNotEmpty()) {
 				binding.addEditProductCountTIL.error = null
 			}
 		}
 		binding.addEditProductDescriptionTIET.doAfterTextChanged {
-			if(it!!.isNotEmpty()) {
+			if (it!!.isNotEmpty()) {
 				binding.addEditProductDescriptionTIL.error = null
 			}
 		}
+	}
+	private fun returnData() {
+		val intent = Intent()
+		setResult(RESULT_OK, intent)
+		finish() // Закрываем активность
 	}
 	@SuppressLint("Recycle")
 	fun getRealPathFromURI(uri: Uri?): String? {

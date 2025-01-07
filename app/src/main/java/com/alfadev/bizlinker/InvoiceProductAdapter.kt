@@ -39,7 +39,7 @@ class InvoiceProductAdapter(private val productList: ArrayList<InvoiceProductIte
 		val productItem = productList[position]
 		holder.productNameTxt.text = productItem.product.name
 		holder.productPriceTxt.text = productItem.product.price.toString()
-		if(productItem.product.fileUrl != null) Glide.with(holder.productIcon.context).load(productItem.product.fileUrl).into(holder.productIcon)
+		if(productItem.product.image != null) Glide.with(holder.productIcon.context).load(productItem.product.image).into(holder.productIcon)
 		else holder.productLogoTxt.text = productItem.product.name.substring(0, 2)
 	}
 	

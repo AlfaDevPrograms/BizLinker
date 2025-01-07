@@ -20,8 +20,8 @@
     <string name="register">Регистрация</string>
     <string name="sign_in_button_continue">Войти</string>
     <string name="register_button_continue">Зарегистрироваться</string>
-    <string name="email_or_nickanme">Email/Никнейм</string>
-    <string name="email_or_nickanme_hint">example@gmail.com</string>
+    <string name="inn">ИНН</string>
+    <string name="inn_hint">0000000000</string>
     <string name="password">Пароль</string>
     <string name="password_hint">********</string>
     <string name="remember">Запомнить</string>
@@ -64,4 +64,5 @@
     <string name="search">Поиск</string>
     <string name="save">Сохранить</string>
     <string name="like_price">Желаемая цена</string>
+    <string name="smth_went_wrong">Нет подключения к интернету!</string>
 </resources>

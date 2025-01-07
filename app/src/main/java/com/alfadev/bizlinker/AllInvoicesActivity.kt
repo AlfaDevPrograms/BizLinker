@@ -18,7 +18,7 @@ class AllInvoicesActivity: AppCompatActivity(), InvoiceAdapter.OnItemClickListen
 		setContentView(binding.root)
 		val listArray: ArrayList<InvoiceItem> = ArrayList()
 		for(i in 0 .. 10) {
-			listArray.add(InvoiceItem(i.toLong(), i.toLong(), OrganizationItem(i.toLong(), getString(R.string.username_chat_item_txt_hint) + " $i", i.toString(), i.toString(), i.toString(), i.toString(), i.toString(), i.toString(), arrayListOf(EmailItem(i.toLong(), "")), arrayListOf(PhoneItem(i.toLong(), "")), null, OrganizationForm(i.toLong(), ""), null), null, 1000.00 + i))
+			listArray.add(InvoiceItem(i.toLong(), i.toLong(), OrganizationItem(i.toLong(), getString(R.string.username_chat_item_txt_hint) + " $i", i.toString(), i.toString(), i.toString(), i.toString(), i.toString(), i.toString(), arrayListOf(EmailItem(i.toLong(), "")), arrayListOf(PhoneItem(i.toLong(), "")), null,"", null), null, 1000.00 + i))
 		}
 		binding.allInvoices.layoutManager = LinearLayoutManager(this)
 		binding.allInvoices.adapter = InvoiceAdapter(listArray, this)

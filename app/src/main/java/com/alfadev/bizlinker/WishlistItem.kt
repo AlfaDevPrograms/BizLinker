@@ -1,3 +1,3 @@
 package com.alfadev.bizlinker
 
-data class WishlistItem(val id: Long, val productName: String, val productCount: Int, val productPrice: Double, val organization: OrganizationItem)
+data class WishlistItem(val id: Long, val name: String, val count: Int, val price: Double, var organization: OrganizationItem)

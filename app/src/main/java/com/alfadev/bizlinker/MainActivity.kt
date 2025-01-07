@@ -8,6 +8,7 @@ import android.content.SharedPreferences
 import android.net.ConnectivityManager
 import android.net.Network
 import android.os.Bundle
+import android.util.Log
 import android.view.ViewTreeObserver
 import android.view.Window
 import android.view.animation.Animation
@@ -18,6 +19,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import com.alfadev.bizlinker.LoginActivity.Companion.organization
 import com.alfadev.bizlinker.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationItemView
 import com.yandex.mobile.ads.banner.BannerAdEventListener
@@ -26,7 +28,13 @@ import com.yandex.mobile.ads.banner.BannerAdView
 import com.yandex.mobile.ads.common.AdRequest
 import com.yandex.mobile.ads.common.AdRequestError
 import com.yandex.mobile.ads.common.ImpressionData
+import okhttp3.Call
+import okhttp3.Callback
 import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.Response
+import org.json.JSONObject
+import java.io.IOException
 import kotlin.math.roundToInt
 
 
@@ -41,6 +49,41 @@ class MainActivity : AppCompatActivity() {
 		binding = ActivityMainBinding.inflate(layoutInflater)
 		setContentView(binding.root)
 		//Весь остальной код, выше не трогать!!!
+		client = OkHttpClient()
+		TOKEN_VALUE = sharedPreferences.getString("token", "")!!
+		val request = Request.Builder().url("$BASE_URL$GET_ME")
+			.addHeader(HEADER_TXT, HEADER_VALUE)
+			.addHeader(TOKEN_TXT, "$TOKEN_VALUE_START$TOKEN_VALUE")
+			.build()
+		client.newCall(request).enqueue(object : Callback {
+			override fun onResponse(call: Call, response: Response) {
+				if (response.isSuccessful) {
+					response.use {
+						val responseBody = it.body?.string() // Читаем тело ответа
+						val json = JSONObject(responseBody!!)
+						val id = json.getString("id").toLong()
+						val name = json.getString("name")
+						val ogrnNumber =json.getString("ogrn")
+						val kppNumber = json.getString("kpp")
+						val innNumber = json.getString("inn")
+						val okpoCode = json.getString("okpo")
+						val address = json.getString("address")
+						val form = json.getString("type")
+						val website = ""
+						val password = sharedPreferences.getString("password", "")!!
+						organization = OrganizationItem(id,name,ogrnNumber,kppNumber,innNumber, okpoCode,address,password,
+							arrayListOf(), arrayListOf(),
+							arrayListOf(),form,website)
+						Log.e("RESPONSE", json.toString())
+					}
+				} else {
+					Log.e("RESPONSE", response.toString())
+				}
+			}
+			override fun onFailure(call: Call, e: IOException) {
+				Log.e("RESPONSE", e.toString())
+			}
+		})
 		val loadAnimation: Animation = AnimationUtils.loadAnimation(this, R.anim.loading)
 		val dialog = Dialog(this)
 		dialog.window!!.setBackgroundDrawableResource(R.drawable.dialog)
@@ -61,7 +104,7 @@ class MainActivity : AppCompatActivity() {
 			
 			override fun onLost(network: Network) {
 				super.onLost(network)
-				Toast.makeText(baseContext, "sdfglsdfgsd", Toast.LENGTH_LONG).show()
+				Toast.makeText(baseContext, "Потеряна связь!", Toast.LENGTH_LONG).show()
 				runOnUiThread {
 					if (!this@MainActivity.isFinishing) {
 						dialog.findViewById<ImageButton>(R.id.load).startAnimation(loadAnimation)
@@ -219,8 +262,20 @@ class MainActivity : AppCompatActivity() {
 	//Объявление статической переменной
 	companion object {
 		lateinit var client: OkHttpClient
-		const val BASE_URL = "https://a1bd-178-185-91-42.ngrok-free.app"
-		const val SIGN_UP = "/organizations/signup"
+		const val BASE_URL = "http://bizlinker.tw1.ru/api"
+		const val REGISTER = "/auth/register"
+		const val SIGN_UP = "/auth/login"
+		const val GET_ME = "/auth/my"
+		const val GET_ORGANIZATION = "/organizations/"
+		const val GET_PRODUCTS = "/products"
+		const val PRODUCTS = "/my/products"
+		const val WISHLIST = "/my/wishlist"
+		const val ORGANIZATIONS = "/organizations"
+		const val HEADER_TXT = "Accept"
+		const val HEADER_VALUE = "application/json"
+		const val TOKEN_TXT = "Authorization"
+		const val TOKEN_VALUE_START = "Bearer "
+		var TOKEN_VALUE = ""
 		
 		//Сохранение всех настроек
 		lateinit var sharedPreferences: SharedPreferences

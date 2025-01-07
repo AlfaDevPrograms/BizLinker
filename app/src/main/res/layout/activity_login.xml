@@ -91,7 +91,7 @@
                         android:id="@+id/emailTxt"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:hint="@string/email_or_nickanme"
+                        android:hint="@string/inn"
                         app:layout_constraintEnd_toEndOf="parent"
                         android:layout_marginEnd="16dp"
                         app:cursorColor="@color/red"
@@ -173,7 +173,8 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         android:layout_marginBottom="16dp"
                         android:textStyle="normal"
-                        tools:ignore="TouchTargetSizeCheck" />
+                        tools:ignore="TouchTargetSizeCheck"
+                        android:checked="true" />
 
                 <TextView
                         android:text="@string/error_signin"

@@ -14,7 +14,7 @@ import com.google.android.material.snackbar.Snackbar
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-class ProfileFragment: Fragment() {
+class ProfileFragment : Fragment() {
 	private var param1: String? = null
 	private var param2: String? = null
 	override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,26 +24,32 @@ class ProfileFragment: Fragment() {
 			param2 = it.getString(ARG_PARAM2)
 		}
 	}
+	
 	//Биндинг
 	private lateinit var binding: ProfileFragmentBinding
+	
 	@SuppressLint("UseCompatLoadingForDrawables")
-	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+	override fun onCreateView(
+		inflater: LayoutInflater,
+		container: ViewGroup?,
+		savedInstanceState: Bundle?
+	): View {
 		binding = ProfileFragmentBinding.inflate(inflater, container, false)
 		binding.textName.text = organization.name
-		binding.textOgrnNumber.text = organization.ogrnNumber
-		binding.textKppNumber.text = organization.kppNumber
-		binding.textInnNumber.text = organization.innNumber
-		binding.textOkpoCode.text = organization.okpoCode
+		binding.textOgrnNumber.text = organization.ogrn
+		binding.textKppNumber.text = organization.kpp
+		binding.textInnNumber.text = organization.inn
+		binding.textOkpoCode.text = organization.okpo
 		binding.textAddress.text = organization.address
-		binding.textForm.text = organization.form.name
+		binding.textForm.text = organization.type
 		binding.textWebsite.text = organization.website
 		binding.textPassword.text = organization.password
 		var emailsString = ""
 		var phonesString = ""
-		for(item in organization.emails) {
+		for (item in organization.emails) {
 			emailsString += item.name + "\n"
 		}
-		for(item in organization.phones) {
+		for (item in organization.phones) {
 			phonesString += item.name + "\n"
 		}
 		binding.textEmails.text = emailsString
@@ -80,15 +86,20 @@ class ProfileFragment: Fragment() {
 		}
 		binding.switchRole.isChecked = sharedPreferences.getString("role", "provider") == "provider"
 		binding.switchRole.setOnCheckedChangeListener { _, b ->
-			if(b) {
+			if (b) {
 				sharedPreferences.edit().putString("role", "provider").apply()
-				Snackbar.make(binding.profileHeaderTxt,
+				Snackbar.make(
+					binding.profileHeaderTxt,
 					getString(R.string.change_to_provider),
-					Snackbar.LENGTH_SHORT).show()
-			}
-			else {
+					Snackbar.LENGTH_SHORT
+				).show()
+			} else {
 				sharedPreferences.edit().putString("role", "buyer").apply()
-				Snackbar.make(binding.profileHeaderTxt, getString(R.string.change_to_buyer), Snackbar.LENGTH_SHORT).show()
+				Snackbar.make(
+					binding.profileHeaderTxt,
+					getString(R.string.change_to_buyer),
+					Snackbar.LENGTH_SHORT
+				).show()
 			}
 		}
 		return binding.root

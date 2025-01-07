@@ -23,8 +23,18 @@ class SearchAdapter(private val searchList: ArrayList<OrganizationItem>): Recycl
 	override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {
 		val searchItem = searchList[position]
 		holder.userNameTxt.text = searchItem.name
-		holder.descriptionTxt.text = searchItem.innNumber
-		holder.logoTxt.text = searchItem.name.substring(0, 2)
+		holder.descriptionTxt.text = searchItem.inn
+		
+		var correctName = searchItem.name
+		correctName = correctName.replace("\"","")
+		correctName = correctName.replace(" ", "")
+		correctName = try {
+			correctName.substring(3, 6)
+		} catch(ex:Exception){
+			correctName.substring(3,correctName.length)
+		}
+
+		holder.logoTxt.text = correctName
 	}
 	
 	override fun getItemCount(): Int {

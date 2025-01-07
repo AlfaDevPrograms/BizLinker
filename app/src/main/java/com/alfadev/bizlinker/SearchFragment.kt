@@ -5,6 +5,7 @@ import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.INVISIBLE
@@ -16,7 +17,23 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alfadev.bizlinker.InvoiceActivity.Companion.hideKeyboard
+import com.alfadev.bizlinker.MainActivity.Companion.BASE_URL
+import com.alfadev.bizlinker.MainActivity.Companion.HEADER_TXT
+import com.alfadev.bizlinker.MainActivity.Companion.HEADER_VALUE
+import com.alfadev.bizlinker.MainActivity.Companion.ORGANIZATIONS
+import com.alfadev.bizlinker.MainActivity.Companion.TOKEN_TXT
+import com.alfadev.bizlinker.MainActivity.Companion.TOKEN_VALUE
+import com.alfadev.bizlinker.MainActivity.Companion.TOKEN_VALUE_START
+import com.alfadev.bizlinker.MainActivity.Companion.WISHLIST
+import com.alfadev.bizlinker.MainActivity.Companion.client
 import com.alfadev.bizlinker.databinding.SearchFragmentBinding
+import com.google.gson.Gson
+import okhttp3.Call
+import okhttp3.Callback
+import okhttp3.Request
+import okhttp3.Response
+import org.json.JSONObject
+import java.io.IOException
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -32,6 +49,7 @@ class SearchFragment: Fragment() {
 		}
 	}
 	//Биндинг
+	private var page = 1
 	private lateinit var binding: SearchFragmentBinding
 	private lateinit var listOrganizations: ArrayList<OrganizationItem>
 	@SuppressLint("UseCompatLoadingForDrawables")
@@ -74,15 +92,51 @@ class SearchFragment: Fragment() {
 			}
 		}
 		binding.searchOrganizationET.doAfterTextChanged {
-			val newList = listOrganizations.filter { it.name.lowercase().startsWith(binding.searchOrganizationET.text.toString().lowercase()) }
+			val newList = listOrganizations.filter { it.name.lowercase().contains(binding.searchOrganizationET.text.toString().lowercase()) }
 			binding.search.adapter = SearchAdapter(newList as ArrayList<OrganizationItem>)
 		}
 		listOrganizations = ArrayList()
-		for(i in 0 .. 10) {
-			listOrganizations.add(OrganizationItem(i.toLong(), getString(R.string.username_chat_item_txt_hint) + " $i", i.toString(), i.toString(), i.toString(), i.toString(), i.toString(), i.toString(), arrayListOf(EmailItem(i.toLong(), "")), arrayListOf(PhoneItem(i.toLong(), "")), null, OrganizationForm(i.toLong(), ""), null))
-		}
 		binding.search.layoutManager = LinearLayoutManager(this.context)
-		binding.search.adapter = SearchAdapter(listOrganizations)
+		val request = Request.Builder()
+			.url("$BASE_URL$ORGANIZATIONS/?page=$page")
+			.addHeader(HEADER_TXT, HEADER_VALUE)
+			.addHeader(TOKEN_TXT, "$TOKEN_VALUE_START$TOKEN_VALUE")
+			.get()
+			.build()
+		client.newCall(request).enqueue(object : Callback {
+			override fun onResponse(call: Call, response: Response) {
+				if (response.isSuccessful) {
+					response.use {
+						val responseBody = it.body?.string() // Читаем тело ответа
+						val json = JSONObject(responseBody!!)
+						val array = json.getJSONArray("data")
+						val gson = Gson()
+						for (i in 0..<array.length()) {
+							val jsonObject = array.getJSONObject(i)
+							val organization =
+								gson.fromJson(jsonObject.toString(), OrganizationItem::class.java)
+							Log.e("Gson", organization.toString())
+							if (organization.id != LoginActivity.organization.id) {
+								listOrganizations.add(organization)
+							}
+						}
+						this@SearchFragment.requireActivity().runOnUiThread {
+							binding.search.adapter = SearchAdapter(listOrganizations)
+						}
+					}
+				} else {
+					response.use {
+						val responseBody = it.body?.string() // Читаем тело ответа
+						val json = JSONObject(responseBody!!)
+						Log.e("RESPONSE", json.toString())
+					}
+				}
+			}
+			
+			override fun onFailure(call: Call, e: IOException) {
+				Log.e("RESPONSE", e.toString())
+			}
+		})
 		binding.filterSearch.setOnClickListener {
 			getFilters()
 		}

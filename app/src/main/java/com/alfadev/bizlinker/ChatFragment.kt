@@ -75,7 +75,7 @@ class ChatFragment: Fragment(), ChatAdapter.OnItemClickListener {
 			}
 		}
 		binding.searchChatET.doAfterTextChanged {
-			val newList = listArray.filter { it.targetOrganization.name.lowercase().startsWith(binding.searchChatET.text.toString().lowercase()) }
+			val newList = listArray.filter { it.targetOrganization.name.lowercase().contains(binding.searchChatET.text.toString().lowercase()) }
 			binding.chats.adapter = ChatAdapter(newList as ArrayList<ChatItem>, this)
 		}
 		if(sharedPreferences.getString("role", "provider") == "provider") {
@@ -86,7 +86,7 @@ class ChatFragment: Fragment(), ChatAdapter.OnItemClickListener {
 		}
 		listArray = ArrayList()
 		for(i in 0 .. 10) {
-			listArray.add(ChatItem(i.toLong(), i.toLong(), OrganizationItem(i.toLong(), getString(R.string.username_chat_item_txt_hint) + " $i", i.toString(), i.toString(), i.toString(), i.toString(), i.toString(), i.toString(), arrayListOf(EmailItem(i.toLong(), "")), arrayListOf(PhoneItem(i.toLong(), "")), null, OrganizationForm(i.toLong(), ""), null), false))
+			listArray.add(ChatItem(i.toLong(), i.toLong(), OrganizationItem(i.toLong(), getString(R.string.username_chat_item_txt_hint) + " $i", i.toString(), i.toString(), i.toString(), i.toString(), i.toString(), i.toString(), arrayListOf(EmailItem(i.toLong(), "")), arrayListOf(PhoneItem(i.toLong(), "")), null,"", null), false))
 		}
 		binding.chats.layoutManager = LinearLayoutManager(this.context)
 		binding.chats.adapter = ChatAdapter(listArray, this)

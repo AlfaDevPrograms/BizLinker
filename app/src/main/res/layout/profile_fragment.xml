@@ -79,7 +79,9 @@
                             app:layout_constraintTop_toTopOf="@id/divider3"
                             android:layout_marginTop="8dp">
 
-                        <TableRow>
+                        <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
 
                             <TextView
                                     android:layout_width="50dp"
@@ -99,47 +101,9 @@
                                     android:textSize="20sp" />
                         </TableRow>
 
-                        <TableRow>
-
-                            <TextView
-                                    android:layout_width="50dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:text="@string/organization_ogrn"
-                                    android:textSize="20sp"
-                                    android:layout_marginBottom="8dp"
-                                    android:autoSizeTextType="none" />
-
-                            <TextView
-                                    android:id="@+id/textOgrnNumber"
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="2"
-                                    android:text=""
-                                    android:textSize="20sp" />
-                        </TableRow>
-
-                        <TableRow>
-
-                            <TextView
-                                    android:layout_width="50dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:text="@string/organization_kpp"
-                                    android:textSize="20sp"
-                                    android:layout_marginBottom="8dp"
-                                    android:autoSizeTextType="none" />
-
-                            <TextView
-                                    android:id="@+id/textKppNumber"
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="2"
-                                    android:text=""
-                                    android:textSize="20sp" />
-                        </TableRow>
-
-                        <TableRow>
+                        <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
 
                             <TextView
                                     android:layout_width="50dp"
@@ -159,7 +123,53 @@
                                     android:textSize="20sp" />
                         </TableRow>
 
-                        <TableRow>
+                        <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                            <TextView
+                                    android:layout_width="50dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="@string/organization_ogrn"
+                                    android:textSize="20sp"
+                                    android:layout_marginBottom="8dp"
+                                    android:autoSizeTextType="none" />
+
+                            <TextView
+                                    android:id="@+id/textOgrnNumber"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="2"
+                                    android:text=""
+                                    android:textSize="20sp" />
+                        </TableRow>
+
+                        <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                            <TextView
+                                    android:layout_width="50dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="@string/organization_kpp"
+                                    android:textSize="20sp"
+                                    android:layout_marginBottom="8dp"
+                                    android:autoSizeTextType="none" />
+
+                            <TextView
+                                    android:id="@+id/textKppNumber"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="2"
+                                    android:text=""
+                                    android:textSize="20sp" />
+                        </TableRow>
+
+                        <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
 
                             <TextView
                                     android:layout_width="50dp"
@@ -179,7 +189,9 @@
                                     android:textSize="20sp" />
                         </TableRow>
 
-                        <TableRow>
+                        <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
 
                             <TextView
                                     android:layout_width="50dp"
@@ -199,47 +211,9 @@
                                     android:textSize="20sp" />
                         </TableRow>
 
-                        <TableRow>
-
-                            <TextView
-                                    android:layout_width="50dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:text="@string/organization_emails"
-                                    android:textSize="20sp"
-                                    android:layout_marginBottom="8dp"
-                                    android:autoSizeTextType="none" />
-
-                            <TextView
-                                    android:id="@+id/textEmails"
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="2"
-                                    android:text=""
-                                    android:textSize="20sp" />
-                        </TableRow>
-
-                        <TableRow>
-
-                            <TextView
-                                    android:layout_width="50dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:text="@string/organization_phones"
-                                    android:textSize="20sp"
-                                    android:layout_marginBottom="8dp"
-                                    android:autoSizeTextType="none" />
-
-                            <TextView
-                                    android:id="@+id/textPhones"
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="2"
-                                    android:text=""
-                                    android:textSize="20sp" />
-                        </TableRow>
-
-                        <TableRow>
+                        <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
 
                             <TextView
                                     android:layout_width="50dp"
@@ -252,26 +226,6 @@
 
                             <TextView
                                     android:id="@+id/textForm"
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="2"
-                                    android:text=""
-                                    android:textSize="20sp" />
-                        </TableRow>
-
-                        <TableRow>
-
-                            <TextView
-                                    android:layout_width="50dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:text="@string/organization_website"
-                                    android:textSize="20sp"
-                                    android:layout_marginBottom="8dp"
-                                    android:autoSizeTextType="none" />
-
-                            <TextView
-                                    android:id="@+id/textWebsite"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="2"
@@ -299,6 +253,73 @@
                                     android:layout_weight="2"
                                     android:text=""
                                     android:textSize="20sp" />
+                        </TableRow>
+
+                        <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                            <TextView
+                                    android:layout_width="50dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="@string/organization_phones"
+                                    android:textSize="20sp"
+                                    android:layout_marginBottom="8dp"
+                                    android:autoSizeTextType="none" />
+
+                            <TextView
+                                    android:id="@+id/textPhones"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="2"
+                                    android:text=""
+                                    android:textSize="20sp" />
+                        </TableRow>
+
+                        <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                            <TextView
+                                    android:layout_width="50dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="@string/organization_emails"
+                                    android:textSize="20sp"
+                                    android:layout_marginBottom="8dp"
+                                    android:autoSizeTextType="none" />
+
+                            <TextView
+                                    android:id="@+id/textEmails"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="2"
+                                    android:text=""
+                                    android:textSize="20sp" />
+                        </TableRow>
+
+                        <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                            <TextView
+                                    android:layout_width="50dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="@string/organization_website"
+                                    android:textSize="20sp"
+                                    android:layout_marginBottom="8dp"
+                                    android:autoSizeTextType="none" />
+
+                            <TextView
+                                    android:id="@+id/textWebsite"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="2"
+                                    android:text=""
+                                    android:textSize="20sp" />
+
                         </TableRow>
 
                     </TableLayout>

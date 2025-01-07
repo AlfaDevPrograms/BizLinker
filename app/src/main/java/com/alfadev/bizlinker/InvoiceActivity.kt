@@ -20,7 +20,7 @@ import com.alfadev.bizlinker.databinding.ActivityInvoiceBinding
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 
-class InvoiceActivity: AppCompatActivity(), ProductAdapter.OnItemClickListenerProduct {
+class InvoiceActivity: AppCompatActivity(), ProductAdapter.OnItemClickListenerProduct, ProductAdapter.OnLongItemClickListenerProduct {
 	//Биндинг
 	private lateinit var binding: ActivityInvoiceBinding
 	private lateinit var listArray: ArrayList<ProductItem>
@@ -53,14 +53,14 @@ class InvoiceActivity: AppCompatActivity(), ProductAdapter.OnItemClickListenerPr
 			dialog.setContentView(R.layout.select_product_to_invoice)
 			val productsList = dialog.findViewById<RecyclerView>(R.id.ownProductsList)
 			productsList.layoutManager = LinearLayoutManager(this)
-			productsList.adapter = ProductAdapter(listArray, this)
+			productsList.adapter = ProductAdapter(listArray, this, this)
 			val productSearch = dialog.findViewById<TextInputEditText>(R.id.ownProductName)
 			val close = dialog.findViewById<ImageButton>(R.id.closeAddProductToInvoice)
 			val header = dialog.findViewById<TextView>(R.id.addEditProductToInvoiceHeaderTxt)
 			header.text = getString(R.string.add_product)
 			productSearch.doAfterTextChanged {
 				val newList = listArray.filter { it.name.lowercase().startsWith(productSearch.text.toString().lowercase()) }
-				productsList.adapter = ProductAdapter(newList as ArrayList<ProductItem>, this)
+				productsList.adapter = ProductAdapter(newList as ArrayList<ProductItem>, this, this)
 			}
 			productSearch.setOnEditorActionListener { _, actionId, _ ->
 				if(actionId == EditorInfo.IME_ACTION_SEARCH) {
@@ -128,5 +128,8 @@ class InvoiceActivity: AppCompatActivity(), ProductAdapter.OnItemClickListenerPr
 			val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
 			imm.showSoftInput(productCount, InputMethodManager.SHOW_IMPLICIT)
 		}, 100) // Задержка в 100 миллисекунд
+	}
+	
+	override fun onLongIItemClickProduct(position: Int) {
 	}
 }
