@@ -22,6 +22,16 @@ import androidx.navigation.fragment.NavHostFragment
 import com.alfadev.bizlinker.LoginActivity.Companion.organization
 import com.alfadev.bizlinker.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationItemView
+import com.google.gson.Gson
+import com.pusher.client.Pusher
+import com.pusher.client.PusherOptions
+import com.pusher.client.channel.PrivateChannel
+import com.pusher.client.channel.PrivateChannelEventListener
+import com.pusher.client.channel.PusherEvent
+import com.pusher.client.connection.ConnectionEventListener
+import com.pusher.client.connection.ConnectionState
+import com.pusher.client.connection.ConnectionStateChange
+import com.pusher.client.util.HttpAuthorizer
 import com.yandex.mobile.ads.banner.BannerAdEventListener
 import com.yandex.mobile.ads.banner.BannerAdSize
 import com.yandex.mobile.ads.banner.BannerAdView
@@ -35,10 +45,21 @@ import okhttp3.Request
 import okhttp3.Response
 import org.json.JSONObject
 import java.io.IOException
+import java.lang.Exception
 import kotlin.math.roundToInt
 
 
 class MainActivity : AppCompatActivity() {
+	interface OnMyEventListener {
+		fun onEventOccurred(message: String)
+	}
+	
+	class EventGenerator {
+		var listener: OnMyEventListener? = null
+		fun triggerEvent() {            // Генерация события
+			listener!!.onEventOccurred("Событие произошло!")
+		}
+	}
 	//Биндинг
 	private lateinit var binding: ActivityMainBinding
 	override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,6 +70,12 @@ class MainActivity : AppCompatActivity() {
 		binding = ActivityMainBinding.inflate(layoutInflater)
 		setContentView(binding.root)
 		//Весь остальной код, выше не трогать!!!
+		val loadAnimation: Animation = AnimationUtils.loadAnimation(this, R.anim.loading)
+		val dialog = Dialog(this)
+		dialog.window!!.setBackgroundDrawableResource(R.drawable.dialog)
+		dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+		dialog.setCancelable(false)
+		dialog.setContentView(R.layout.dialog_load)
 		client = OkHttpClient()
 		TOKEN_VALUE = sharedPreferences.getString("token", "")!!
 		val request = Request.Builder().url("$BASE_URL$GET_ME")
@@ -61,35 +88,57 @@ class MainActivity : AppCompatActivity() {
 					response.use {
 						val responseBody = it.body?.string() // Читаем тело ответа
 						val json = JSONObject(responseBody!!)
-						val id = json.getString("id").toLong()
-						val name = json.getString("name")
-						val ogrnNumber =json.getString("ogrn")
-						val kppNumber = json.getString("kpp")
-						val innNumber = json.getString("inn")
-						val okpoCode = json.getString("okpo")
-						val address = json.getString("address")
-						val form = json.getString("type")
-						val website = ""
-						val password = sharedPreferences.getString("password", "")!!
-						organization = OrganizationItem(id,name,ogrnNumber,kppNumber,innNumber, okpoCode,address,password,
-							arrayListOf(), arrayListOf(),
-							arrayListOf(),form,website)
-						Log.e("RESPONSE", json.toString())
+						val gson = Gson()
+						organization = gson.fromJson(json.toString(), OrganizationItem::class.java)
+						val header = HashMap<String, String>()
+						header[TOKEN_TXT] = "$TOKEN_VALUE_START$TOKEN_VALUE"
+						val authorizer = HttpAuthorizer("http://bizlinker.tw1.ru/broadcasting/auth")
+						authorizer.setHeaders(header)
+						val options = PusherOptions().apply {
+							setAuthorizer(authorizer)
+							setHost("bizlinker.tw1.ru")
+							setWsPort(8080)
+							setWssPort(8080)
+							setUseTLS(false)
+						}
+						val pusher = Pusher("zlmotneylavu7ctww1oq", options)
+						pusher.connect(object : ConnectionEventListener {
+							override fun onConnectionStateChange(change: ConnectionStateChange?) {
+								Log.d("Pusher", "Connection state changed to: ${change?.currentState}")
+								if (change?.currentState == ConnectionState.CONNECTED) {
+									channel = pusher.subscribePrivate("private-chats.${organization.id}")
+									val eventGenerator = EventGenerator()
+									eventGenerator.listener = ChatFragment.onMyEventListener
+									eventGenerator.triggerEvent()
+								}
+							}
+							
+							override fun onError(message: String?, code: String?, e: Exception?) {
+								Log.e("Pusher Error", "Error: $message Code: $code", e)
+							}
+						})
 					}
 				} else {
+					runOnUiThread {
+						if (!this@MainActivity.isFinishing) {
+							dialog.findViewById<ImageButton>(R.id.load).startAnimation(loadAnimation)
+							dialog.show()
+						}
+					}
 					Log.e("RESPONSE", response.toString())
 				}
 			}
+			
 			override fun onFailure(call: Call, e: IOException) {
+				runOnUiThread {
+					if (!this@MainActivity.isFinishing) {
+						dialog.findViewById<ImageButton>(R.id.load).startAnimation(loadAnimation)
+						dialog.show()
+					}
+				}
 				Log.e("RESPONSE", e.toString())
 			}
 		})
-		val loadAnimation: Animation = AnimationUtils.loadAnimation(this, R.anim.loading)
-		val dialog = Dialog(this)
-		dialog.window!!.setBackgroundDrawableResource(R.drawable.dialog)
-		dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-		dialog.setCancelable(false)
-		dialog.setContentView(R.layout.dialog_load)
 		val connectivityManager =
 			this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 		val networkCallback = object : ConnectivityManager.NetworkCallback() {
@@ -271,11 +320,16 @@ class MainActivity : AppCompatActivity() {
 		const val PRODUCTS = "/my/products"
 		const val WISHLIST = "/my/wishlist"
 		const val ORGANIZATIONS = "/organizations"
+		const val CHATS = "/chats"
+		const val SEND_MESSAGE = "/messages/send"
+		const val PIN_MESSAGE = "/messages/pin"
+		const val UNPIN_MESSAGE = "/messages/unpin"
 		const val HEADER_TXT = "Accept"
 		const val HEADER_VALUE = "application/json"
 		const val TOKEN_TXT = "Authorization"
 		const val TOKEN_VALUE_START = "Bearer "
 		var TOKEN_VALUE = ""
+		lateinit var channel: PrivateChannel
 		
 		//Сохранение всех настроек
 		lateinit var sharedPreferences: SharedPreferences

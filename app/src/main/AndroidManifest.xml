@@ -40,7 +40,7 @@
         <activity
                 android:name="com.alfadev.bizlinker.SelectedChatActivity"
                 android:exported="true"
-                android:windowSoftInputMode="stateVisible|adjustResize">
+                android:windowSoftInputMode="adjustResize">
         </activity>
         <activity
                 android:name="com.alfadev.bizlinker.AllInvoicesActivity"
@@ -52,5 +52,6 @@
                 android:exported="true">
         </activity>
         <activity android:name="com.alfadev.bizlinker.AddEditProductActivity" />
+        <activity android:name="com.alfadev.bizlinker.PinnedMessagesActivity" />
     </application>
 </manifest>

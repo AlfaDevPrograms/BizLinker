@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <com.google.android.material.card.MaterialCardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/cardviewAddEditWishlistSave"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:strokeColor="@color/whiteDark"
+            app:layout_constraintStart_toStartOf="parent"
+            app:strokeWidth="3dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp">
+
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingHorizontal="16dp"
+                    android:id="@+id/pinMessageItem"
+                    android:clickable="true"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="8dp">
+
+                <ImageButton
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:id="@+id/pinMessageItemIcon"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:foreground="@drawable/pin"
+                        android:background="@color/empty"
+                        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck"
+                        app:layout_constraintStart_toStartOf="@+id/addEditWishlistNameTIL" />
+
+                <TextView
+                        android:text="@string/pin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:id="@+id/pinMessageItemTxt"
+                        app:layout_constraintBottom_toBottomOf="@+id/backToWishlistFromAddEditWishlist"
+                        app:layout_constraintTop_toTopOf="@+id/backToWishlistFromAddEditWishlist"
+                        app:layout_constraintStart_toEndOf="@+id/backToWishlistFromAddEditWishlist"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:gravity="center|start"
+                        android:layout_marginStart="8dp"
+                        android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="8dp"
+                    android:id="@+id/editMessageItem"
+                    android:clickable="true">
+
+                <ImageButton
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:id="@+id/editMessageItemIcon"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:foreground="@drawable/edit"
+                        android:background="@color/empty"
+                        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck"
+                        app:layout_constraintStart_toStartOf="@+id/addEditWishlistNameTIL" />
+
+                <TextView
+                        android:text="@string/edit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:id="@+id/editMessageItemTxt"
+                        app:layout_constraintBottom_toBottomOf="@+id/backToWishlistFromAddEditWishlist"
+                        app:layout_constraintTop_toTopOf="@+id/backToWishlistFromAddEditWishlist"
+                        app:layout_constraintStart_toEndOf="@+id/backToWishlistFromAddEditWishlist"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:gravity="center|start"
+                        android:layout_marginStart="8dp"
+                        android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingHorizontal="16dp"
+                    android:id="@+id/deleteMessageItem"
+                    android:clickable="true"
+                    android:paddingBottom="16dp"
+                    android:paddingTop="8dp">
+
+                <ImageButton
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:id="@+id/deleteMessageItemIcon"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:foreground="@drawable/delete"
+                        android:background="@color/empty"
+                        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck"
+                        app:layout_constraintStart_toStartOf="@+id/addEditWishlistNameTIL" />
+
+                <TextView
+                        android:text="@string/delete"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:id="@+id/deleteMessageItemTxt"
+                        app:layout_constraintBottom_toBottomOf="@+id/backToWishlistFromAddEditWishlist"
+                        app:layout_constraintTop_toTopOf="@+id/backToWishlistFromAddEditWishlist"
+                        app:layout_constraintStart_toEndOf="@+id/backToWishlistFromAddEditWishlist"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:gravity="center|start"
+                        android:layout_marginStart="8dp"
+                        android:textSize="20sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

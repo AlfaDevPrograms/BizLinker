@@ -34,6 +34,8 @@ android {
 }
 
 dependencies {
+    implementation (libs.logback.classic)
+    implementation(libs.pusher.java.client)
     implementation(libs.gson)
     implementation (libs.material.vx)
     implementation(libs.glide)

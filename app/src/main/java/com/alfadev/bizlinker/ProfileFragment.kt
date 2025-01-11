@@ -1,12 +1,14 @@
 package com.alfadev.bizlinker
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.alfadev.bizlinker.LoginActivity.Companion.organization
+import com.alfadev.bizlinker.MainActivity.Companion.TOKEN_VALUE
 import com.alfadev.bizlinker.MainActivity.Companion.sharedPreferences
 import com.alfadev.bizlinker.databinding.ProfileFragmentBinding
 import com.google.android.material.snackbar.Snackbar
@@ -43,15 +45,23 @@ class ProfileFragment : Fragment() {
 		binding.textAddress.text = organization.address
 		binding.textForm.text = organization.type
 		binding.textWebsite.text = organization.website
-		binding.textPassword.text = organization.password
+		binding.textPassword.text = sharedPreferences.getString("password", "")
 		var emailsString = ""
 		var phonesString = ""
-		for (item in organization.emails) {
-			emailsString += item.name + "\n"
+		try
+		{
+			for (item in organization.emails) {
+				emailsString += item.name + "\n"
+			}
 		}
-		for (item in organization.phones) {
-			phonesString += item.name + "\n"
+		catch(_:Exception){}
+		try
+		{
+			for (item in organization.phones) {
+				phonesString += item.name + "\n"
+			}
 		}
+		catch(_:Exception){}
 		binding.textEmails.text = emailsString
 		binding.textPhones.text = phonesString
 		binding.themeLight.setOnClickListener {
@@ -101,6 +111,15 @@ class ProfileFragment : Fragment() {
 					Snackbar.LENGTH_SHORT
 				).show()
 			}
+		}
+		binding.buttonOut.setOnClickListener {
+			val myIntent = Intent(this@ProfileFragment.requireActivity(), LoginActivity::class.java)
+			sharedPreferences.edit().remove("token").apply()
+			sharedPreferences.edit().remove("isRemember").apply()
+			sharedPreferences.edit().remove("login").apply()
+			sharedPreferences.edit().remove("password").apply()
+			this@ProfileFragment.requireActivity().startActivity(myIntent)
+			this@ProfileFragment.requireActivity().finish()
 		}
 		return binding.root
 	}

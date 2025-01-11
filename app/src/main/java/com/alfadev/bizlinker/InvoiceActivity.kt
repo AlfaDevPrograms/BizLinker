@@ -130,6 +130,6 @@ class InvoiceActivity: AppCompatActivity(), ProductAdapter.OnItemClickListenerPr
 		}, 100) // Задержка в 100 миллисекунд
 	}
 	
-	override fun onLongIItemClickProduct(position: Int) {
+	override fun onLongItemClickProduct(position: Int) {
 	}
 }

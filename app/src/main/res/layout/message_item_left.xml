@@ -1,0 +1,64 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <com.google.android.material.card.MaterialCardView
+            android:id="@+id/chatItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            app:cardCornerRadius="25dp"
+            app:cardElevation="0dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:strokeWidth="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="4dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp"
+            android:alpha="0.9">
+
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="8dp"
+                android:gravity="fill_vertical|end"
+                android:paddingHorizontal="16dp">
+
+            <TextView
+                    android:text="@string/message_chat_item_txt_hint"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/messageItemTxt"
+                    android:textStyle="normal"
+                    android:textSize="16sp"
+                    android:layout_weight="0.7"
+                    android:paddingEnd="8dp"
+                    android:maxWidth="250dp" />
+
+            <TextView
+                    android:text="@string/datetime_chat_item_txt_hint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/datetimeItemTxt"
+                    android:textStyle="normal"
+                    android:textSize="12sp"
+                    android:maxLines="1"
+                    android:alpha="0.5"
+                    android:paddingTop="2dp" />
+
+            <ImageButton
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:id="@+id/messageItemPin"
+                    android:background="@color/empty"
+                    android:foreground="@drawable/pin"
+                    android:clickable="false"
+                    app:layout_constraintEnd_toEndOf="@+id/productDescriptionTxt"
+                    app:layout_constraintBottom_toBottomOf="@+id/productPriceImg"
+                    app:layout_constraintTop_toTopOf="@+id/productPriceImg"
+                    android:layout_marginStart="4dp" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -93,7 +93,7 @@ class SearchFragment: Fragment() {
 		}
 		binding.searchOrganizationET.doAfterTextChanged {
 			val newList = listOrganizations.filter { it.name.lowercase().contains(binding.searchOrganizationET.text.toString().lowercase()) }
-			binding.search.adapter = SearchAdapter(newList as ArrayList<OrganizationItem>)
+			binding.search.adapter = SearchAdapter(this@SearchFragment.requireActivity(),newList as ArrayList<OrganizationItem>)
 		}
 		listOrganizations = ArrayList()
 		binding.search.layoutManager = LinearLayoutManager(this.context)
@@ -121,7 +121,7 @@ class SearchFragment: Fragment() {
 							}
 						}
 						this@SearchFragment.requireActivity().runOnUiThread {
-							binding.search.adapter = SearchAdapter(listOrganizations)
+							binding.search.adapter = SearchAdapter(this@SearchFragment.requireActivity(),listOrganizations)
 						}
 					}
 				} else {

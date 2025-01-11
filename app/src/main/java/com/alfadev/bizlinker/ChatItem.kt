@@ -1,3 +1,8 @@
 package com.alfadev.bizlinker
 
-data class ChatItem(val id: Long, val createAt: Long, val targetOrganization: OrganizationItem, val isPin: Boolean)
+data class ChatItem
+	(val id: Long,
+	 val createAt: Long,
+	 val receiver: OrganizationItem,
+	 val last_message: LastMessageItem,
+	 val isPin: Boolean)

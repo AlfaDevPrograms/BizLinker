@@ -344,7 +344,7 @@ class ProductsFragment : Fragment(), ProductAdapter.OnItemClickListenerProduct,
 		resultLauncher.launch(intent)
 	}
 	
-	override fun onLongIItemClickProduct(position: Int) {
+	override fun onLongItemClickProduct(position: Int) {
 		val deleteProduct = listProducts[position]
 		val dlgAlert = AlertDialog.Builder(
 			this@ProductsFragment.requireActivity(),
@@ -363,7 +363,15 @@ class ProductsFragment : Fragment(), ProductAdapter.OnItemClickListenerProduct,
 				override fun onResponse(call: Call, response: Response) {
 					if (response.isSuccessful) {
 						response.use {
-							updateData()
+							listProducts.remove(deleteProduct)
+							this@ProductsFragment.requireActivity().runOnUiThread {
+								binding.products.adapter =
+									ProductAdapter(
+										listProducts,
+										this@ProductsFragment,
+										this@ProductsFragment
+									)
+							}
 						}
 					} else {
 						response.use {
@@ -435,7 +443,15 @@ class ProductsFragment : Fragment(), ProductAdapter.OnItemClickListenerProduct,
 				override fun onResponse(call: Call, response: Response) {
 					if (response.isSuccessful) {
 						response.use {
-							updateData()
+							listWishlist.remove(deleteWishlist)
+							this@ProductsFragment.requireActivity().runOnUiThread {
+								binding.products.adapter =
+									WishlistAdapter(
+										listWishlist,
+										this@ProductsFragment,
+										this@ProductsFragment
+									)
+							}
 						}
 					} else {
 						response.use {

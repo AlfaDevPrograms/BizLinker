@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="black">
-        #0A0A0A
+        #06090E
     </color>
     <color name="whiteDark">
         #F8F4FF
     </color>
     <color name="main">
-        #FFE4C4
+        #FFE5B4
     </color>
     <color name="empty">
         #00F6F6F6
@@ -22,24 +22,27 @@
         #FFCF48
     </color>
     <color name="greenRegister">
-        #77DD77
+        #00A86B
     </color>
     <color name="red">
+        #EE204D
+    </color>
+    <color name="redException">
         #E4717A
     </color>
     <color name="blue">
-        #c4dfff
+        #E6E6FA
     </color>
     <color name="green">
-        #c4ffc6
+        #FFC0CB
     </color>
     <color name="gray">
-        #1D1E33
+        #131e2a
     </color>
     <color name="gray2">
-        #452D35
+        #23010b
     </color>
     <color name="gray3">
-        #23282B
+        #171717
     </color>
 </resources>

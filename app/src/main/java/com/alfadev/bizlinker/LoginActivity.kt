@@ -116,12 +116,25 @@ class LoginActivity : AppCompatActivity() {
 				if (isRegister) {
 					val request = Request.Builder().url("$BASE_URL$REGISTER")
 						.addHeader(HEADER_TXT, HEADER_VALUE).post(requestBody).build()
+					runOnUiThread {
+						if (!this@LoginActivity.isFinishing) {
+							dialog.findViewById<ImageButton>(R.id.load).startAnimation(loadAnimation)
+							dialog.show()
+						}
+					}
 					client.newCall(request).enqueue(object : Callback {
 						override fun onResponse(call: Call, response: Response) {
 							if (response.isSuccessful) {
-								binding.signIn.performClick()
-								binding.login.performClick()
+								runOnUiThread {
+									binding.signIn.performClick()
+									binding.login.performClick()
+								}
 							} else {
+								runOnUiThread {
+									if (!this@LoginActivity.isFinishing) {
+										dialog.dismiss()
+									}
+								}
 								response.use {
 									val responseBody = it.body?.string() // Читаем тело ответа
 									val json = JSONObject(responseBody!!)
@@ -145,6 +158,11 @@ class LoginActivity : AppCompatActivity() {
 						
 						override fun onFailure(call: Call, e: IOException) {
 							runOnUiThread {
+								if (!this@LoginActivity.isFinishing) {
+									dialog.dismiss()
+								}
+							}
+							runOnUiThread {
 								Snackbar.make(
 									binding.welcomeTxt,
 									getString(R.string.smth_went_wrong),
@@ -156,6 +174,12 @@ class LoginActivity : AppCompatActivity() {
 				} else {
 					val request = Request.Builder().url("$BASE_URL$SIGN_UP")
 						.addHeader(HEADER_TXT, HEADER_VALUE).post(requestBody).build()
+					runOnUiThread {
+						if (!this@LoginActivity.isFinishing) {
+							dialog.findViewById<ImageButton>(R.id.load).startAnimation(loadAnimation)
+							dialog.show()
+						}
+					}
 					client.newCall(request).enqueue(object : Callback {
 						override fun onResponse(call: Call, response: Response) {
 							if (response.isSuccessful) {
@@ -176,6 +200,11 @@ class LoginActivity : AppCompatActivity() {
 									finish()
 								}
 							} else {
+								runOnUiThread {
+									if (!this@LoginActivity.isFinishing) {
+										dialog.dismiss()
+									}
+								}
 								response.use {
 									val responseBody = it.body?.string() // Читаем тело ответа
 									val json = JSONObject(responseBody!!)
@@ -198,6 +227,11 @@ class LoginActivity : AppCompatActivity() {
 						}
 						
 						override fun onFailure(call: Call, e: IOException) {
+							runOnUiThread {
+								if (!this@LoginActivity.isFinishing) {
+									dialog.dismiss()
+								}
+							}
 							runOnUiThread {
 								Toast.makeText(
 									this@LoginActivity,

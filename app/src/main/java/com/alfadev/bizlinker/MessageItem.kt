@@ -1,3 +1,3 @@
 package com.alfadev.bizlinker
 
-data class MessageItem(val id: Long, val content: String, val createdAt: Long, val senderOrganization: OrganizationItem, val isRead: Boolean)
+data class MessageItem(val id: Long, val message: String, val date: String, val sender_id: Long, val status: Boolean, var pinned: Boolean)

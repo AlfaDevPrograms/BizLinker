@@ -5,7 +5,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.alfadev.bizlinker.ChatAdapter.OnItemClickListener
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale

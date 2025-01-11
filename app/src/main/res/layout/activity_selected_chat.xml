@@ -4,7 +4,8 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="true">
+        android:fitsSystemWindows="false"
+        android:id="@+id/parentSelectedChatView">
 
     <com.google.android.material.card.MaterialCardView
             android:layout_width="0dp"
@@ -76,37 +77,86 @@
                         android:textColor="@color/black" />
             </com.google.android.material.card.MaterialCardView>
 
-            <LinearLayout
-                    android:orientation="vertical"
+            <TextView
+                    android:text="@string/username_chat_item_txt_hint"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/selectedChatAva"
-                    app:layout_constraintTop_toTopOf="@+id/selectedChatAva"
+                    android:id="@+id/selectedChatUsernameTxt"
+                    android:textAllCaps="true"
                     app:layout_constraintStart_toEndOf="@+id/selectedChatAva"
                     app:layout_constraintEnd_toStartOf="@+id/add_invoice"
+                    app:layout_constraintTop_toTopOf="@+id/selectedChatAva"
+                    app:layout_constraintBottom_toBottomOf="@+id/selectedChatAva"
                     android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginTop="2dp">
+                    android:layout_marginEnd="16dp"
+                    android:autoSizeTextType="uniform"
+                    android:gravity="center|start"
+                    android:autoSizeMinTextSize="12dp"
+                    android:autoSizeMaxTextSize="20dp" />
 
-                <TextView
-                        android:text="@string/username_chat_item_txt_hint"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/selectedChatUsernameTxt"
-                        android:textSize="18sp"
-                        android:textAllCaps="true" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
 
-                <TextView
-                        android:text="@string/datetime_chat_item_txt_hint"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/selectedChatOnlineTxt"
-                        android:textStyle="normal"
-                        android:textSize="14sp"
-                        android:gravity="center|start"
-                        android:alpha="0.5"
-                        tools:ignore="TextContrastCheck" />
-            </LinearLayout>
+    <com.google.android.material.card.MaterialCardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:cardCornerRadius="0dp"
+            android:id="@+id/pinChatHeader"
+            android:layout_marginStart="-8dp"
+            android:layout_marginEnd="-8dp"
+            app:strokeWidth="0.5dp"
+            tools:ignore="VisualLintBounds"
+            app:layout_constraintTop_toBottomOf="@+id/selectedChatHeader"
+            android:clickable="true"
+            android:visibility="gone">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="8dp">
+
+            <ImageButton
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:id="@+id/pinnedIcon"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:foreground="@drawable/pin"
+                    android:background="@color/empty"
+                    tools:ignore="ImageContrastCheck,SpeakableTextPresentCheck,TouchTargetSizeCheck"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintStart_toEndOf="@+id/pinTxt"
+                    android:layout_marginStart="8dp"
+                    android:clickable="false"
+                    android:contextClickable="false" />
+
+            <TextView
+                    android:text="@string/pinned"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/pinTxt"
+                    android:layout_marginStart="8dp"
+                    android:gravity="center|start"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/pinnedIcon"
+                    app:layout_constraintBottom_toBottomOf="@+id/pinnedIcon"
+                    android:textSize="16sp" />
+
+            <TextView
+                    android:text="@string/pinned"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/lastPinTxt"
+                    android:gravity="center|start"
+                    app:layout_constraintTop_toBottomOf="@+id/pinTxt"
+                    app:layout_constraintStart_toStartOf="@+id/pinTxt"
+                    android:layout_marginTop="4dp"
+                    android:textStyle="normal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="16dp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
@@ -114,11 +164,11 @@
     <androidx.recyclerview.widget.RecyclerView
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/selectedChatHeader"
-            android:id="@+id/allMesagesChat" />
+            app:layout_constraintTop_toBottomOf="@+id/pinChatHeader"
+            android:id="@+id/allMesagesChat"
+            app:layout_constraintBottom_toTopOf="@+id/cardviewInput" />
 
     <ImageView
             android:layout_width="0dp"
@@ -136,14 +186,17 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:id="@+id/cardviewInput">
+            android:layout_marginStart="-8dp"
+            android:layout_marginEnd="-8dp"
+            android:layout_marginBottom="-8dp"
+            android:id="@+id/cardviewInput"
+            app:cardCornerRadius="0dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginHorizontal="8dp">
 
             <EditText
                     android:layout_width="0dp"
@@ -151,36 +204,35 @@
                     android:autofillHints=""
                     android:inputType="text|textImeMultiLine|textMultiLine|textNoSuggestions"
                     android:id="@+id/selectedChatMessage"
-                    app:layout_constraintBottom_toBottomOf="@+id/attach"
-                    app:layout_constraintTop_toTopOf="@+id/attach"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginStart="16dp"
                     android:hint="@string/message_hint"
                     app:layout_constraintEnd_toStartOf="@+id/attach"
                     android:textSize="20sp"
                     android:layout_marginEnd="8dp"
-                    android:paddingVertical="12dp"
-                    android:maxLines="7"
+                    android:paddingVertical="16dp"
+                    android:maxLines="6"
                     android:textColorHighlight="@color/red"
-                    android:textCursorDrawable="@drawable/custom_cursor" />
+                    android:textCursorDrawable="@drawable/custom_cursor"
+                    android:paddingHorizontal="16dp" />
 
             <ImageButton
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:id="@+id/attach"
-                    app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:foreground="@drawable/attach"
                     android:background="@color/empty"
                     tools:ignore="ImageContrastCheck,SpeakableTextPresentCheck,TouchTargetSizeCheck"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginEnd="16dp" />
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="8dp" />
 
             <ImageButton
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:id="@+id/send"
-                    app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:foreground="@drawable/send"
                     android:background="@color/empty"
@@ -188,7 +240,6 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginEnd="16dp"
                     android:visibility="invisible"
-                    android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
